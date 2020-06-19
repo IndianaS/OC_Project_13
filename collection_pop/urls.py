@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('admin/', admin.site.urls),
     path("users/", include("users.urls", namespace="users")),
+    path("figurines/", include("figurines.urls", namespace="figurines")),
 ]
