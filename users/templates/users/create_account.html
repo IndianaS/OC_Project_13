@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>
+    Création compte utilisateur
+</h2>
+<section>
+    <form method="post" class="custom-forms">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Créer un compte</button>
+    </form>
+</section>
+{% endblock content %}

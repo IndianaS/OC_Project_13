@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>
+    Connexion utilisateur
+</h2>
+<section>
+    <form action="" method="post" class="custom-forms">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" id="button-submit">Se connecter</button>
+    </form>
+    <br>
+    <a href="{% url 'password_reset' %}"><button>Réinitialiser votre mot de passe</button></a>
+</section>
+{% endblock content %}

@@ -6,8 +6,23 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
+{% block navigation %}
 <body>
-    {% block content %}
-    {% endblock content %}
+  <ul>
+        <a href="{% url 'home' %}"><button>Home</button></a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'users:logout' %}"><button>Deconnexion</button></a>
+        <a href="{% url 'users:profile' %}"><button>Mon Compte</button></a>
+        <a href="{% url 'users:collection' %}"><button>Ma collection</button></a>
+        <a href="{% url 'users:did_you_see' %}"><button>Qui à vue ?</button></a>
+    {% else %}
+        <a href="{% url 'users:login' %}"><button>Connexion</button></a>
+        <a href="{% url 'users:create_account' %}"><button>Création de compte</button></a>
+    {% endif %}
+  </ul>
+{% endblock navigation %}
+    
+{% block content %}
+{% endblock content %}
 </body>
 </html>

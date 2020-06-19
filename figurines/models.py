@@ -38,6 +38,9 @@ class Collection(models.Model):
         verbose_name="Figurine enregistré"
     )
 
+    def __str__(self):
+        return self.figurine
+
 
 class Did_you_see(models.Model):
 

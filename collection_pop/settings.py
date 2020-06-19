@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UsersConfig',
     'figurines.apps.FigurinesConfig',
 ]
 
@@ -126,7 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "users.User"
-"""
 LOGIN_REDIRECT_URL = "users:profile"
 LOGOUT_REDIRECT_URL = "home"
-"""
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
