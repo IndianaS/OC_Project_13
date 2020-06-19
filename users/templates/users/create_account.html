@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -8,7 +9,7 @@
 <section>
     <form method="post" class="custom-forms">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit">Créer un compte</button>
     </form>
 </section>
