@@ -41,9 +41,12 @@ class Collection(models.Models):
 
 class Did_you_see(models.Models):
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     title = models.Charfield(max_length=100)
-    user = models.Charfield(max_length=100)
-    contenu = models.TextField(null=True)
+    text = models.TextField(null=True)
     date = models.DateTimeField(default=timezone.now,
                                 verbose_name="Date de parution")
     
