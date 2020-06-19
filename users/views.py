@@ -33,7 +33,6 @@ def create_account(request):
 def collection_user(request):
     user = request.user
     figurine_collection = Collection.objects.filter(user=user)
-
     return render(request, 'users/collection.html')
 
 

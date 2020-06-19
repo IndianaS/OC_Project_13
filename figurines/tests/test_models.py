@@ -1,17 +1,16 @@
 from django.test import TestCase
-
-from figurines.models import Category, Figurine, Collection, Did_you_see
+from figurines.models import Category, Collection, Did_you_see, Figurine
 from users.models import User
 
 
 class FigurineTestsModels(TestCase):
 
     def test_models_category_figurine(self):
-        category = Category.objects.create(name="wolrd of warcraft")
+        category = Category.objects.create(name="world of warcraft")
         self.assertEquals(category.name, "world of warcraft")
     
     def test_models_figurine(self):
-        category = Category.objects.create(name="wolrd of warcraft")
+        category = Category.objects.create(name="world of warcraft")
         figurine = Figurine.objects.create(
             id=31,
             id_category=category,
