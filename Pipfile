@@ -10,6 +10,9 @@ django = "*"
 requests = "*"
 psycopg2 = "*"
 django-extensions = "*"
+pillow = "*"
+coverage = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.7"
