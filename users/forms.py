@@ -17,7 +17,7 @@ class CustomAddFigurineCreationForm(ModelForm):
     picture_figurine = forms.ImageField(label="Photo de la figurine")
     id = forms.IntegerField(label="Numéro de la figurine")
     category = forms.CharField(label="Categorie de la figurine")
-    picture_figurine = forms.ImageField(label="Image", required = False)
+    picture_figurine = forms.ImageField(label="Photo de la figurine", required = False)
 
     class Meta:
         model = Figurine

@@ -68,7 +68,7 @@ def did_you_see(request):
 @login_required(login_url='/users/login/')
 def add_figurine(request):
     if request.method == 'POST':
-        form = CustomAddFigurineCreationForm(request.POST)
+        form = CustomAddFigurineCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # id = form.cleaned_data.get('id')
