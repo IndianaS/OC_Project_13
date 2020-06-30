@@ -14,7 +14,7 @@ class Category(models.Model):
 class Figurine(models.Model):
 
     id = models.BigIntegerField(primary_key=True)
-    id_category = models.ForeignKey(
+    category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE
     )
@@ -24,6 +24,11 @@ class Figurine(models.Model):
     def __str__(self):
         return self.name
 
+    def figurines(self):
+        return Figurine.objects.filter(
+            id_category=self.id_category,
+            name=self.name
+        )
 
 class Collection(models.Model):
 
@@ -42,7 +47,7 @@ class Collection(models.Model):
         return self.figurine
 
 
-class Did_you_see(models.Model):
+class DidYouSee(models.Model):
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,

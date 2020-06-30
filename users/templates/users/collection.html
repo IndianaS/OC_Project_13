@@ -2,5 +2,12 @@
 
 {% block content %}
 <h2>Ma collection de figurine .</h2>
-<a href="{% url 'users:add_figurine' %}"><button>Ajouter une figurine à la collection .</button></a>
+<form action="{% url 'users:collection' %}" method="get">
+    <div>
+     <input type="search" id="result_search" class="result_search" name="q">
+     <button>Rechercher</button>
+    </div>
+</form>
+<br>
+<a href="{% url 'users:add_figurine' %}"><button>Ajouter une figurine à la collection</button></a>
 {% endblock content %}

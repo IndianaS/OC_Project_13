@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from .forms import CustomUserCreationForm, CustomAddFigurineCreationForm
-from figurines.models import Collection
+from figurines.models import Collection, Figurine
 
 
 @login_required(login_url='/users/login/')
@@ -33,6 +33,20 @@ def create_account(request):
 def collection_user(request):
     user = request.user
     figurine_collection = Collection.objects.filter(user=user)
+    """
+    result = None
+    try:
+        figurine_search = request.Get['q']
+        figurine = Figurine.objects.filter(name__icontains=figurine_search)
+        if figurine_collection:
+            collection_figurine = figurine.figurines()
+        else:
+            figurine_collection = None
+            collection_figurine = None
+
+    except KeyError:
+        print('Pas de requête')
+    """
     return render(request, 'users/collection.html')
 
 

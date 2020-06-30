@@ -21,3 +21,9 @@ class CustomAddFigurineCreationForm(ModelForm):
         model = Figurine
         name = forms.CharField(label="Nom de la figurine")
         fields = ("id", "id_category", "name", "picture_figurine")
+
+
+
+class CustomReadBddCreationForm():
+    class Meta:
+        pass
