@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm, CustomAddFigurineCreationForm
+from .forms import CustomUserCreationForm, CustomAddFigurineCreationForm, CustomCommentCreationForm
 from figurines.models import Collection, Figurine
 
 
@@ -52,7 +52,17 @@ def collection_user(request):
 
 @login_required(login_url='/users/login/')
 def did_you_see(request):
-    return render(request, 'users/did_you_see.html')
+    if request.method == 'POST':
+        form = CustomCommentCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            title = form.cleaned_data.get('title')
+            text = form.cleaned_data.get('text')
+            data = form.cleaned_data.get('data')
+            return redirect('/users/did_you_see')
+    else:
+        form = CustomCommentCreationForm()
+    return render(request, 'users/did_you_see.html', {'form': form})
 
 
 @login_required(login_url='/users/login/')
@@ -61,10 +71,10 @@ def add_figurine(request):
         form = CustomAddFigurineCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            id = form.cleaned_data.get('id')
-            category = form.cleaned_data.get('category')
-            name = form.cleaned_data.get('name')
-            picture_figurine = form.cleaned.get('picture_figurine')
+            # id = form.cleaned_data.get('id')
+            # category = form.cleaned_data.get('category')
+            # name = form.cleaned_data.get('name')
+            # picture_figurine = form.cleaned.get('picture_figurine')
             return redirect('/users/collection')
     else:
         form = CustomAddFigurineCreationForm()

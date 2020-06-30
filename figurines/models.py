@@ -19,7 +19,7 @@ class Figurine(models.Model):
         on_delete=models.CASCADE
     )
     name = models.CharField(max_length=200)
-    picture_figurine = models.ImageField(upload_to='figurines')
+    picture_figurine = models.ImageField(upload_to='', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -55,7 +55,7 @@ class DidYouSee(models.Model):
     )
     title = models.CharField(max_length=100)
     text = models.TextField(null=True)
-    date = models.DateTimeField(default=timezone.now,
+    date = models.DateField(default=timezone.now,
                                 verbose_name="Date de parution")
     
     class Meta:
