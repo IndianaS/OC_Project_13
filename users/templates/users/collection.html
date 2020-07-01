@@ -4,10 +4,19 @@
 <h2>Ma collection de figurine .</h2>
 <form action="{% url 'users:collection' %}" method="get">
     <div>
-     <input type="search" id="result_search" class="result_search" name="q">
-     <button>Rechercher</button>
+    <input type="search" id="collection_user" class="collection_user" name="q">
+    <button>Rechercher</button>
     </div>
 </form>
 <br>
+{% if figurine %}
+<div class="container-fluid img-f">
+    <img src="{{ figurine.picture_figurine }}" alt="Image du produit">
+    {% else %}
+        <h2 class="text-center mt-0 font-custom-title">
+            Pas de résultat pour {{ figurine.name }}.
+        </h2>
+    {% endif %}    
+</div>
 <a href="{% url 'users:add_figurine' %}"><button>Ajouter une figurine à la collection</button></a>
 {% endblock content %}

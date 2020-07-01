@@ -1,5 +1,5 @@
 from django.test import TestCase
-from figurines.models import Category, Collection, Did_you_see, Figurine
+from figurines.models import Category, Collection, DidYouSee, Figurine
 from users.models import User
 
 
@@ -13,18 +13,18 @@ class FigurineTestsModels(TestCase):
         category = Category.objects.create(name="world of warcraft")
         figurine = Figurine.objects.create(
             id=31,
-            id_category=category,
+            category=category,
             name="thrall"
         )
         self.assertEquals(figurine.id, 31)
-        self.assertEquals(figurine.id_category, category)
+        self.assertEquals(figurine.category, category)
         self.assertEquals(figurine.name, "thrall")
 
     def test_models_collection(self):
         category = Category.objects.create(name="wolrd of warcraft")
         figurine = Figurine.objects.create(
             id=31,
-            id_category=category,
+            category=category,
             name="thrall"
         )
         user = User.objects.create_user(

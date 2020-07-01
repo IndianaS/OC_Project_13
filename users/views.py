@@ -33,10 +33,9 @@ def create_account(request):
 def collection_user(request):
     user = request.user
     figurine_collection = Collection.objects.filter(user=user)
-    """
     result = None
     try:
-        figurine_search = request.Get['q']
+        figurine_search = request.GET['q']
         figurine = Figurine.objects.filter(name__icontains=figurine_search)
         if figurine_collection:
             collection_figurine = figurine.figurines()
@@ -46,7 +45,6 @@ def collection_user(request):
 
     except KeyError:
         print('Pas de requête')
-    """
     return render(request, 'users/collection.html')
 
 
@@ -71,10 +69,6 @@ def add_figurine(request):
         form = CustomAddFigurineCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # id = form.cleaned_data.get('id')
-            # category = form.cleaned_data.get('category')
-            # name = form.cleaned_data.get('name')
-            # picture_figurine = form.cleaned.get('picture_figurine')
             return redirect('/users/collection')
     else:
         form = CustomAddFigurineCreationForm()
