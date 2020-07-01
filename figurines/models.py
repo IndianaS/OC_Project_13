@@ -30,6 +30,7 @@ class Figurine(models.Model):
             name=self.name
         )
 
+
 class Collection(models.Model):
 
     user = models.ForeignKey(
