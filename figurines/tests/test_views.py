@@ -11,5 +11,10 @@ class FigurineTestViews(TestCase):
                                         "category": "World of Warcraft",
                                         "name": "Thrall"
                                     })
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed('users/collection.html')
+    
+    def test_user_collection_user(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.get('/users/collection/?q=logan')
+        self.assertEqual(response.status_code, 404)
