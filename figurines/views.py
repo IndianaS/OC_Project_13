@@ -23,9 +23,7 @@ def add_figurine(request):
 @login_required(login_url='/users/login/')
 def collection_user(request):
     user = request.user
-
     figurines = user.figurine_set.all()
-
     return render(request, 'figurines/collection.html', {'figurines': figurines})
 
 
@@ -39,7 +37,6 @@ def search(request):
     else:
         print('Pas de requête')
         redirect('/figurines/collection/')
-
     return render(request, 'figurines/search.html', {'figurines_list': figurines_list})
 
 
