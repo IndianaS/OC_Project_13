@@ -46,7 +46,12 @@ def did_you_see(request):
         form = CustomCommentCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/users/did_you_see/')
+            return redirect('/figurines/did_you_see/')
     else:
         form = CustomCommentCreationForm()
-    return render(request, 'users/did_you_see.html', {'form': form})
+    return render(request, 'figurines/did_you_see.html', {'form': form})
+
+
+@login_required(login_url='/users/login/')
+def i_see(request):
+    user = request.user
