@@ -22,11 +22,11 @@ class Figurine(models.Model):
     picture_figurine = models.ImageField(upload_to='', null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def figurines(self):
         return Figurine.objects.filter(
-            id_category=self.id_category,
+            category=self.category,
             name=self.name
         )
 

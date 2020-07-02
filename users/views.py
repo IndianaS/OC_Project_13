@@ -32,21 +32,27 @@ def create_account(request):
 @login_required(login_url='/users/login/')
 def collection_user(request):
     user = request.user
-    figurine_collection = Collection.objects.filter(user=user)
+    # figurine_collection = Collection.objects.get(user=user)
     result = None
-    try:
-        figurine_search = request.GET['q']
-        figurine = Figurine.objects.filter(name__icontains=figurine_search)
-        if figurine_collection:
-            collection_figurine = figurine.figurines()
-        else:
-            figurine_collection = None
-            collection_figurine = None
+    # try:
+    #     figurine_search = request.GET['q']
+    #     figurine = Figurine.objects.filter(name__icontains=figurine_search)
+    #     if figurine:
+    #         collection_figurine = figurine.figurines()
+    #     else:
+    #         collection_figurine = None
 
+    # except KeyError:
+    #     print('Pas de requête')
+    """
+    try:
+        query = request.GET['q']
+        figurines = Figurine.objects.filter(name__icontains=query)
     except KeyError:
         print('Pas de requête')
-    return render(request, 'users/collection.html')
+    """
 
+    return render(request, 'users/collection.html',)
 
 @login_required(login_url='/users/login/')
 def did_you_see(request):
@@ -65,10 +71,15 @@ def did_you_see(request):
 
 @login_required(login_url='/users/login/')
 def add_figurine(request):
+    user = request.user
     if request.method == 'POST':
         form = CustomAddFigurineCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            figurine = form.save()
+            user_collection, created = Collection.objects.get_or_create(user=user, figurine=figurine)
+            if not created:
+                status = "Déjà ajouté à la collection"
+
             return redirect('/users/collection')
     else:
         form = CustomAddFigurineCreationForm()

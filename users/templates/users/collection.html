@@ -9,8 +9,9 @@
     </div>
 </form>
 <br>
-{% if figurine %}
+{% if figurines_list %}
 <div class="container-fluid img-f">
+    {% for figurine in figurines_list %}
     <img src="{{ figurine.picture_figurine }}" alt="Image du produit">
     {% else %}
         <h2 class="text-center mt-0 font-custom-title">
