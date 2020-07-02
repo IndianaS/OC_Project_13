@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 ipython = "*"
+autopep8 = "*"
 
 [packages]
 django = "*"

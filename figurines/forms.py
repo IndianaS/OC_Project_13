@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm
-from figurines.models import Category, Figurine
+from figurines.models import Category, Figurine, DidYouSee
 
 
 class CustomAddFigurineCreationForm(ModelForm):
@@ -23,3 +23,11 @@ class CustomAddFigurineCreationForm(ModelForm):
 
         self.cleaned_data['category'] = category
         return super(CustomAddFigurineCreationForm, self).clean()
+
+
+class CustomCommentCreationForm(ModelForm):
+    title = forms.CharField(label="Titre")
+    #text = forms.TextField(label="Texte")
+    class Meta:
+        model = DidYouSee
+        fields = ("title", "text", "date")

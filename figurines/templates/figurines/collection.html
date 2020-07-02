@@ -3,13 +3,12 @@
 
 {% block content %}
 <h2>Ma collection de figurine .</h2>
-<form action="{% url 'users:collection' %}" method="get">
+<form action="{% url 'figurines:search' %}" method="get">
     <div>
     <input type="search" id="collection_user" class="collection_user" name="q">
     <button>Rechercher</button>
     </div>
 </form>
 <br>
-
 <a href="{% url 'figurines:add_figurine' %}"><button>Ajouter une figurine à la collection</button></a>
 {% endblock content %}

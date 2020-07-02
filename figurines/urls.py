@@ -7,4 +7,7 @@ app_name = "figurines"
 
 urlpatterns = [
     path("add_figurine/", views.add_figurine, name="add_figurine"),
+    path("collection/", views.collection_user, name="collection"),
+    path("search/", views.search, name="search"),
+    path("did_you_see/", views.did_you_see, name="did_you_see"),
 ]

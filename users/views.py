@@ -2,9 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm, CustomCommentCreationForm
 from figurines.models import Figurine
-
+from .forms import CustomUserCreationForm
 
 @login_required(login_url='/users/login/')
 def profile(request):
@@ -27,26 +26,3 @@ def create_account(request):
         form = CustomUserCreationForm()
     return render(request, 'users/create_account.html', {'form': form})
 
-
-@login_required(login_url='/users/login/')
-def collection_user(request):
-    user = request.user
-    result = None
-    try:
-        query = request.GET['q']
-        figurines_list = user.figurine_set.filter(name__icontains=query)
-    except KeyError:
-        print('Pas de requête')
-    return render(request, 'figurines/result_search.html', {'figurines_list': figurines_list})
-
-
-@login_required(login_url='/users/login/')
-def did_you_see(request):
-    if request.method == 'POST':
-        form = CustomCommentCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/users/did_you_see')
-    else:
-        form = CustomCommentCreationForm()
-    return render(request, 'users/did_you_see.html', {'form': form})
