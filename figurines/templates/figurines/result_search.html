@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% if figurines_list %}
+<div class="container-fluid img-f">
+    {% for figurine in figurines_list %}
+    <img src="{{ MEDIA_PREFIX }}{{ figurine.picture_figurine }}" alt="Image du produit">
+    {% endfor %}
+    {% else %}
+        <h2 class="text-center mt-0 font-custom-title">
+            Pas de résultat pour {{ figurine.name }}.
+        </h2>
+    {% endif %}
+</div>
+{% endblock content %}

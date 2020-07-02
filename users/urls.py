@@ -16,5 +16,4 @@ urlpatterns = [
     path("create_account/", views.create_account, name="create_account"),
     path("collection/", views.collection_user, name="collection"),
     path("did_you_see/", views.did_you_see, name="did_you_see"),
-    path("add_figurine/", views.add_figurine, name="add_figurine")
 ]

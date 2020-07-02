@@ -13,39 +13,19 @@ class Category(models.Model):
 
 class Figurine(models.Model):
 
-    id = models.BigIntegerField(primary_key=True)
+    figurine_number = models.BigIntegerField()
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE
     )
     name = models.CharField(max_length=200)
     picture_figurine = models.ImageField(upload_to='', null=True, blank=True)
+    user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+    )
 
     def __str__(self):
         return str(self.name)
-
-    def figurines(self):
-        return Figurine.objects.filter(
-            category=self.category,
-            name=self.name
-        )
-
-
-class Collection(models.Model):
-
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="collection",
-    )
-    figurine = models.ForeignKey(
-        Figurine,
-        on_delete=models.CASCADE,
-        verbose_name="Figurine enregistré"
-    )
-
-    def __str__(self):
-        return self.figurine
 
 
 class DidYouSee(models.Model):

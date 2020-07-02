@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 <h2>Ma collection de figurine .</h2>
 <form action="{% url 'users:collection' %}" method="get">
@@ -9,15 +10,6 @@
     </div>
 </form>
 <br>
-{% if figurines_list %}
-<div class="container-fluid img-f">
-    {% for figurine in figurines_list %}
-    <img src="{{ figurine.picture_figurine }}" alt="Image du produit">
-    {% else %}
-        <h2 class="text-center mt-0 font-custom-title">
-            Pas de résultat pour {{ figurine.name }}.
-        </h2>
-    {% endif %}    
-</div>
-<a href="{% url 'users:add_figurine' %}"><button>Ajouter une figurine à la collection</button></a>
+
+<a href="{% url 'figurines:add_figurine' %}"><button>Ajouter une figurine à la collection</button></a>
 {% endblock content %}
