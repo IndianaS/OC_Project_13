@@ -24,3 +24,20 @@ class FigurineTestViews(TestCase):
         response = self.client.get('/figurines/collection/?q=logan')
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('figurines/collection.html')
+
+    def test_figurine_did_you_see(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.get("/figurines/did_you_see/")
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed("figurines/did_you_see.html")
+
+    def test_create_question(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.post("/figurines/create_question/",
+                                    {
+                                        "title": "Je recherche batman",
+                                        "text": "Bonjour, je recherche Batman",
+                                        "date": "03/07/2020"
+                                    })
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('figurines/did_you_see.html')

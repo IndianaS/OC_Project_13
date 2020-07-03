@@ -30,17 +30,20 @@ class Figurine(models.Model):
 
 class DidYouSee(models.Model):
 
-    author = models.ManyToManyField(
+    author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
     )
     title = models.CharField(max_length=100)
     text = models.TextField(null=True)
     date = models.DateField(default=timezone.now,
                                 verbose_name="Date de parution")
+    datetime = models.DateTimeField(auto_now=True)
+
     
     class Meta:
         verbose_name ="article"
-        ordering = ['date']
+        ordering = ['-datetime']
     
     def __str__(self):
         return self.title

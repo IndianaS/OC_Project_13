@@ -10,4 +10,6 @@ urlpatterns = [
     path("collection/", views.collection_user, name="collection"),
     path("search/", views.search, name="search"),
     path("did_you_see/", views.did_you_see, name="did_you_see"),
+    path("create_question/", views.create_question, name="create_question"),
+    path("delete_figurine/", views.delete_figurine, name="delete_figurine"),
 ]

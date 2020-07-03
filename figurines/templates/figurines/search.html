@@ -12,10 +12,14 @@
     <p>Catégorie de la figurine: {{ figurine.category }}</p>
     <p>Nom de la figurine: {{ figurine.name }}</p>
     <p>Numéro de la figurine: {{ figurine.figurine_number }}</p>
+    <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
+        type="submit">Supprimer</button>
+    <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.figurine_number }}">
+    </form>
     {% endfor %}
     {% else %}
         <h2 class="text-center mt-0 font-custom-title">
-            Pas de résultat pour {{ figurine.name }}.
+            Pas de résultat.
         </h2>
     {% endif %}
 </div>

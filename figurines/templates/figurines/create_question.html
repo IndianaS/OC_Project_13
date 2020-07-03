@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Tu cherche une figurine ? alors poste une annonce !</h2>
+
+<section>
+    <form method="post" class="custom-forms">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button type="submit">Valider</button>
+    </form>
+</section>
+{% endblock content %}

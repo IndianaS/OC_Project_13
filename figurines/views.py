@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from .forms import CustomAddFigurineCreationForm, CustomCommentCreationForm
-
+from .models import DidYouSee, Figurine
 
 @login_required(login_url='/users/login/')
 def add_figurine(request):
@@ -42,16 +42,33 @@ def search(request):
 
 @login_required(login_url='/users/login/')
 def did_you_see(request):
+    questions = DidYouSee.objects.all()
+    return render(request, 'figurines/did_you_see.html', {'questions': questions})
+
+@login_required(login_url='/users/login/')
+def create_question(request):
     if request.method == 'POST':
         form = CustomCommentCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            annonce = form.save(commit=False)
+            annonce.author = request.user
+            annonce.save()
+
             return redirect('/figurines/did_you_see/')
     else:
         form = CustomCommentCreationForm()
-    return render(request, 'figurines/did_you_see.html', {'form': form})
+    return render(request, 'figurines/create_question.html', {'form': form})
 
 
 @login_required(login_url='/users/login/')
-def i_see(request):
-    user = request.user
+def delete_figurine(request):
+    if request.method == 'POST':
+        user = request.user
+        id_figurine = request.POST.get("id")
+        figurine = Figurine.objects.get(id=id_figurine)
+        figurine_delete = Figurine.objects.get(
+            user=user,
+            id=figurine
+        )
+        figurine_delete.delete()
+        return redirect('figurines/collection.html')

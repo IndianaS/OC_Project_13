@@ -2,14 +2,22 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h2>Tu cherche une figurine ? alors poste une annonce !</h2>
+<h2>Tu cherche une figurine ? alors poste une annonces !</h2>
 
 <section>
-    <form method="post" class="custom-forms">
-        {% csrf_token %}
-        {{ form|crispy }}
+    <a href="{% url 'figurines:create_question' %}"><button>Ajouter une annonce</button></a>
+    <ul>
+        {% for question in questions %}
+        <li>
+            {{ question.author }} - {{ question.date }}
+            <br>
+            {{ question.title }}
+            <br>
+            {{ question.text }}
+            <br>
+        </li>
         <br>
-        <button type="submit">Valider</button>
-    </form>
+        {% endfor %}
+    </ul>
 </section>
 {% endblock content %}
