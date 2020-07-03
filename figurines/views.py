@@ -64,11 +64,8 @@ def create_question(request):
 def delete_figurine(request):
     if request.method == 'POST':
         user = request.user
-        id_figurine = request.POST.get("id")
+        id_figurine = request.POST.get("id_figurine")
+        print(id_figurine)
         figurine = Figurine.objects.get(id=id_figurine)
-        figurine_delete = Figurine.objects.get(
-            user=user,
-            id=figurine
-        )
-        figurine_delete.delete()
-        return redirect('figurines/collection.html')
+        figurine.delete()
+        return redirect('/figurines/collection/')

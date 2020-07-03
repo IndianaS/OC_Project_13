@@ -14,8 +14,9 @@
     <p>Numéro de la figurine: {{ figurine.figurine_number }}</p>
     <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
         type="submit">Supprimer</button>
-    <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.figurine_number }}">
+    <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.pk }}">
     </form>
+    <p>ICI : {{ figurine.pk }}</p>
     {% endfor %}
     {% else %}
         <h2 class="text-center mt-0 font-custom-title">
