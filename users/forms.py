@@ -5,7 +5,13 @@ from django.forms import ModelForm
 
 
 class CustomUserCreationForm(UserCreationForm):
+    username = forms.CharField(
+        label="Nom d'utilisateur", 
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': "Nom d'utilisateur *"
+            }))
+
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ("username", "email")
-

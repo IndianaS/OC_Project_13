@@ -2,17 +2,33 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h2>
-    Connexion utilisateur
-</h2>
-<section>
-    <form action="" method="post" class="custom-forms">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br>
-        <button type="submit" id="button-submit">Se connecter</button>
-    </form>
+
+<section class="login">
+    <h2>
+        Connexion utilisateur
+    </h2>
     <br>
-    <a href="{% url 'password_reset' %}"><button>Réinitialiser votre mot de passe</button></a>
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" class="custom-forms">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row align-items-stretch">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        {{ form.password }}
+                        {{ form.password.errors }}
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit" id="button-submit">Se connecter</button>
+        </form>
+        <br>
+    <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'password_reset' %}#reset-pages-1">Mot de passe oublié ?</a>
+    </div>
 </section>
 {% endblock content %}

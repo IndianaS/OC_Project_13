@@ -3,18 +3,19 @@
 
 {% block content %}
 
-<section class="page-section" id="about">
+<section class="page-section" id="collection">
     <div class="container">
         <div class="text-center">
-            <h3 class="section-subheading">Ma collection de figurine .</h3>
-            <form action="{% url 'figurines:search' %}" method="get">
+            <h3 class="textcustom text-muted">Recherche les figurines de ta collection .</h3>
+            <br>
+            <form action="{% url 'figurines:search' %}#search" method="get">
                 <div>
                 <input type="search" id="collection_user" class="collection_user" name="q">
-                <button class="btn btn-primary text-uppercase js-scroll-trigger">Rechercher</button>
+                <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
                 </div>
             </form>
             <br>
-            <a class="btn btn-primary text-uppercase js-scroll-trigger" href="{% url 'figurines:add_figurine' %}">Ajouter une figurine à la collection</a>
+            <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'figurines:add_figurine' %}#addfigurine">Ajouter une figurine à la collection</a>
         </div>
     </div>
 </section>

@@ -5,10 +5,37 @@ from figurines.models import Category, Figurine, DidYouSee
 
 
 class CustomAddFigurineCreationForm(ModelForm):
-    name = forms.CharField(label="Nom de la figurine")
-    figurine_number = forms.IntegerField(label="Numéro de la figurine")
-    category = forms.CharField(label="Categorie de la figurine")
-    picture_figurine = forms.ImageField(label="Photo de la figurine", required = False)
+    name = forms.CharField(
+        label="Nom de la figurine",
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Nom de la figurine *'
+            })
+    )
+
+    figurine_number = forms.IntegerField(
+        label="Numéro de la figurine",
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': 'Numéro de la figurine *'
+            })
+    )
+
+    category = forms.CharField(
+        label="Categorie de la figurine",
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Catégorie *'
+            })
+    )
+
+    picture_figurine = forms.ImageField(
+        label="Photo de la figurine",
+        required=False,
+        widget=forms.FileInput(
+            attrs={'class': 'input-file'}
+        )
+    )
 
     class Meta:
         model = Figurine
@@ -26,8 +53,22 @@ class CustomAddFigurineCreationForm(ModelForm):
 
 
 class CustomCommentCreationForm(ModelForm):
-    title = forms.CharField(label="Titre")
-    #text = forms.TextField(label="Texte")
+    title = forms.CharField(
+        label="Titre",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Titre *'
+            }))
+
+    text = forms.CharField(
+        label="Titre",
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Texte *'
+            }))
+
     class Meta:
         model = DidYouSee
-        fields = ("title", "text", "date")
+        fields = ("title", "text",)

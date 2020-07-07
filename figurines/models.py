@@ -36,8 +36,7 @@ class DidYouSee(models.Model):
     )
     title = models.CharField(max_length=100)
     text = models.TextField(null=True)
-    date = models.DateField(default=timezone.now,
-                                verbose_name="Date de parution")
+    date = models.DateField(auto_now=True, verbose_name="Date de parution")
     datetime = models.DateTimeField(auto_now=True)
 
     

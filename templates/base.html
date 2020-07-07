@@ -7,7 +7,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>{% block title %}{% endblock title %}</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -22,7 +21,7 @@
       {% block nav %}
       <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars ml-1"></i>
@@ -32,12 +31,12 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Accueil</a></li>
                     {% if user.is_authenticated %}
                       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">Deconnexion</a></li>
-                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:profile' %}">Mon Compte</a></li>
-                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:collection' %}">Ma collection</a></li>
-                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:did_you_see' %}">Qui à vue ?</a></li>
+                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:profile' %}#profile">Mon Compte</a></li>
+                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:collection' %}#collection">Ma collection</a></li>
+                      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:did_you_see' %}#didyousee">Qui à vue ?</a></li>
                     {% else %}
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}">Connexion</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:create_account' %}">Création de compte</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:create_account' %}">Créer mon compte</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -48,11 +47,14 @@
       {% block header %}
       <header class="masthead">
         <div class="container">
-            <div class="masthead-subheading">Tu cherche à répertorier ta collection de figurines, alors bienvenue!</div>
+            <div class="masthead-subheading textcolorcustom">Tu cherche à répertorier ta collection de figurines Pop, alors bienvenue!</div>
             {% if user.is_authenticated %}
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'figurines:collection' %}">Ma collection</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'figurines:collection' %}#collection">Ma collection</a>
             {% else %}
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'users:login' %}">Connexion</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:login' %}">Connexion</a>
+              <br>
+              <br>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:create_account' %}">Créer mon compte</a>
             {% endif %}
         </div>
       </header>
@@ -64,12 +66,11 @@
         {% block footer %}
         <footer class="footer py-4">
           <div class="container">
-              <div class="row align-items-center">
-                  <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
-                  <div class="col-lg-4 text-lg-right">
-                      <a class="mr-3" href="#!">Privacy Policy</a>
-                      <a href="#!">Terms of Use</a>
-                  </div>
+              <div class="align-items-center">
+                <div class="text-center">
+                  <a class="mr-3" href="{% url 'legal_notice' %}#legalnotice" style="color:black">Mentions légales</a>
+              </div>
+                  <div class="text-center">Copyright © 2020 Collection Pop</div>
               </div>
           </div>
       </footer>

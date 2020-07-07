@@ -2,12 +2,38 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<section>
-    <form method="post" enctype="multipart/form-data" class="custom-forms">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br>
-        <button type="submit">Valider</button>
-    </form>
+<section id="addfigurine">
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" class="custom-forms">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row align-items-stretch">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.figurine_number }}
+                        {{ form.figurine_number.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        {{ form.category }}
+                        {{ form.category.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        <label for="{{ form.picture_figurine.id_for_label }}"
+                            class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Choisir une
+                            image</label>
+                        {{ form.picture_figurine }}
+                        {{ form.picture_figurine.errors }}
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom"
+                type="submit">Valider</button>
+        </form>
+    </div>
 </section>
 {% endblock content %}

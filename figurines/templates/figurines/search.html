@@ -6,7 +6,7 @@
 {% get_media_prefix as MEDIA_PREFIX %}
 
 {% if figurines_list %}
-<section class="page-section bg-light" id="team">
+<section class="page-section bg-light" id="search">
     {% for figurine in figurines_list %}
     <div class="container">
         <div class="row">
@@ -14,11 +14,11 @@
             <ul>
                 <div class="team-member">
                     <img class="mx-auto rounded-circle" src="{{ MEDIA_PREFIX }}{{ figurine.picture_figurine }}" alt="Image du produit">
-                <li>    
-                    <p>Catégorie : {{ figurine.category }}</p>
-                    <p>Nom de la figurine: {{ figurine.name }}</p>
-                    <p>Numéro de la figurine: {{ figurine.figurine_number }}</p>
-                </li>
+                    
+                    <div class="textcustomfigurine">Catégorie : {{ figurine.category }}</div>
+                    <div class="textcustomfigurine">Nom de la figurine: {{ figurine.name }}</div>
+                    <div class="textcustomfigurine">Numéro de la figurine: {{ figurine.figurine_number }}</div>
+                
                     <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
                         type="submit"><i class="fas fa-trash"></i></i>
                     </button>&nbsp Supprimer
@@ -27,9 +27,11 @@
                     {% endfor %}
             </ul>
                     {% else %}
-                    <h2 class="text-center mt-0 font-custom-title">
-                        Pas de résultat.
-                    </h2>
+                    <section class="omg" id="search">
+                        <h2 class="textomg">
+                            Pas de résultat.
+                        </h2>
+                </section>
                 {% endif %}
                 </div>
             </div>
