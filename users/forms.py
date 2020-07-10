@@ -9,6 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
         label="Nom d'utilisateur", 
         widget=forms.TextInput(
             attrs={
+                'class': 'test',
                 'placeholder': "Nom d'utilisateur *"
             }))
 

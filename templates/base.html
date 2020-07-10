@@ -35,7 +35,7 @@
                       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:collection' %}#collection">Ma collection</a></li>
                       <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'figurines:did_you_see' %}#didyousee">Qui à vue ?</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}#login">Connexion</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:create_account' %}">Créer mon compte</a></li>
                     {% endif %}
                 </ul>
@@ -51,7 +51,7 @@
             {% if user.is_authenticated %}
               <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'figurines:collection' %}#collection">Ma collection</a>
             {% else %}
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:login' %}">Connexion</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:login' %}#login">Connexion</a>
               <br>
               <br>
               <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:create_account' %}">Créer mon compte</a>
@@ -80,6 +80,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Cookies JS-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+        crossorigin="anonymous"></script>
+        <script src="jquery.ihavecookies.js"></script>
         <!-- Contact form JS-->
         <script src="assets/mail/jqBootstrapValidation.js"></script>
         <script src="assets/mail/contact_me.js"></script>

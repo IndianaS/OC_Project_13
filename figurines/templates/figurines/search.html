@@ -7,25 +7,32 @@
 
 {% if figurines_list %}
 <section class="page-section bg-light" id="search">
-    {% for figurine in figurines_list %}
+    
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-            <ul>
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="{{ MEDIA_PREFIX }}{{ figurine.picture_figurine }}" alt="Image du produit">
-                    
-                    <div class="textcustomfigurine">Catégorie : {{ figurine.category }}</div>
-                    <div class="textcustomfigurine">Nom de la figurine: {{ figurine.name }}</div>
-                    <div class="textcustomfigurine">Numéro de la figurine: {{ figurine.figurine_number }}</div>
-                
-                    <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
-                        type="submit"><i class="fas fa-trash"></i></i>
-                    </button>&nbsp Supprimer
-                    <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.pk }}">
-                    </form>
-                    {% endfor %}
-            </ul>
+            <div class="col-lg-12 col-md-10">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        {% for figurine in figurines_list %}
+                        <div class="col-lg-4 col-md-12">
+                            <ul>
+                                <div class="team-member">
+                                    <img class="mx-auto rounded-circle" src="{{ MEDIA_PREFIX }}{{ figurine.picture_figurine }}" alt="Image du produit">
+                                    <div class="textcustomfigurine">Catégorie : {{ figurine.category }}</div>
+                                    <div class="textcustomfigurine">Nom de la figurine: {{ figurine.name }}</div>
+                                    <div class="textcustomfigurine">Numéro de la figurine: {{ figurine.figurine_number }}</div>
+                                    <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
+                                        type="submit"><i class="fas fa-trash"></i></i>
+                                    </button>&nbsp Supprimer
+                                    <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.pk }}">
+                                    </form>
+                                    <br>
+                                    <br>
+                                </div>
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
                     {% else %}
                     <section class="omg" id="search">
                         <h2 class="textomg">
@@ -39,3 +46,4 @@
     </div>
 </section>
 {% endblock content %}
+

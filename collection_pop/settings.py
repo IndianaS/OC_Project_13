@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.42', '5f10a96df878.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.42', '0180185c9ed6.ngrok.io']
 
 
 # Application definition
@@ -138,8 +138,9 @@ LOGIN_REDIRECT_URL = "users:profile"
 LOGOUT_REDIRECT_URL = "home"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "mail.gandi.net"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('email_gmail')
+DEFAULT_FROM_EMAIL = os.getenv('email_gmail')
 EMAIL_HOST_PASSWORD = os.getenv('password_gmail')

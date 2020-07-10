@@ -2,12 +2,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-<section class="login">
-    <h2>
+<br>
+<div class="text-center" id="login">
+    <span class="fa-stack fa-4x">
+        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+    </span>
+    <br>
+    <h2 class="textcustom">
         Connexion utilisateur
     </h2>
-    <br>
     <div class="container">
         <form method="post" enctype="multipart/form-data" class="custom-forms">
             {% csrf_token %}
@@ -30,5 +34,5 @@
         <br>
     <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'password_reset' %}#reset-pages-1">Mot de passe oublié ?</a>
     </div>
-</section>
+</div>
 {% endblock content %}
