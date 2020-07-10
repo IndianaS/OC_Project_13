@@ -2,15 +2,42 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<br>
+<div class="text-center" id="login">
+    <span class="fa-stack fa-4x">
+        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+    </span>
+    <br>
+    <h2 class="textcustom">
+        Création compte utilisateur
+    </h2>
+    <div class="container">
+        <form method="post" class="custom-forms">
+            {% csrf_token %}
+            <div class="row align-items-stretch">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                        <p class="help-block text-danger"></p>
 
-<h2>
-    Création compte utilisateur
-</h2>
-<section>
-    <form method="post" class="custom-forms">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Créer un compte</button>
-    </form>
-</section>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                        <p class="help-block text-danger"></p>
+
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Créer un compte</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

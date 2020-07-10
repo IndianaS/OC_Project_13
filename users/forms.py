@@ -6,11 +6,31 @@ from django.forms import ModelForm
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
-        label="Nom d'utilisateur", 
+        label="", 
         widget=forms.TextInput(
             attrs={
-                'class': 'test',
                 'placeholder': "Nom d'utilisateur *"
+            }))
+    
+    email = forms.CharField(
+        label="", 
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': "Adresse mail *"
+            }))
+    
+    password1 = forms.CharField(
+        label="", 
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': "Mot de passe *"
+            }))
+
+    password2 = forms.CharField(
+        label="", 
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': "Confirmation du mot de passe *"
             }))
 
     class Meta(UserCreationForm.Meta):
