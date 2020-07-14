@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from figurines.models import Figurine
+from users.models import User
 from .forms import CustomUserCreationForm
 
 @login_required(login_url='/users/login/')
@@ -26,3 +27,15 @@ def create_account(request):
         form = CustomUserCreationForm()
     return render(request, 'users/create_account.html', {'form': form})
 
+
+@login_required(login_url='/users/login/')
+def del_user(request):
+    try:
+        user = User.objects.get('username')
+        user.delete()
+        print("Utilisateur supprimé")
+    
+    except User.DoesNotExist:
+        return redirect('/users/profile')
+
+    return redirect('')

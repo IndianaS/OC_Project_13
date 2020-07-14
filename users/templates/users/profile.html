@@ -19,7 +19,7 @@
                 <h3 class="textcustom text-muted">Email du compte : {{user.email}}</h3>
                 <h3 class="textcustom text-muted">Nom d'utilisateur : {{user.username}}</h3>
                 <br>
-                <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Supprimer mon compte</button>
+                <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:del_user' %}">Supprimer mon compte</a>
             </div>
             <div class="col-md-4">
             </div>

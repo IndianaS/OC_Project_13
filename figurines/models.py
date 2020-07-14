@@ -38,6 +38,10 @@ class DidYouSee(models.Model):
     text = models.TextField(null=True)
     date = models.DateField(auto_now=True, verbose_name="Date de parution")
     datetime = models.DateTimeField(auto_now=True)
+    parent = models.ForeignKey(
+        "DidYouSee", 
+        on_delete=models.CASCADE
+        )
 
     
     class Meta:
