@@ -40,7 +40,9 @@ class DidYouSee(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     parent = models.ForeignKey(
         "DidYouSee", 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
         )
 
     

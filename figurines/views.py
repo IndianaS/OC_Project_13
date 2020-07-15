@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 from .forms import CustomAddFigurineCreationForm, CustomCommentCreationForm
 from .models import DidYouSee, Figurine
@@ -42,16 +42,37 @@ def search(request):
 
 @login_required(login_url='/users/login/')
 def did_you_see(request):
-    questions = DidYouSee.objects.all()
+    questions = [ post for post in DidYouSee.objects.all() if post.id == post.parent.id ]
     return render(request, 'figurines/did_you_see.html', {'questions': questions})
 
 @login_required(login_url='/users/login/')
-def create_question(request):
+def post_detail(request, id_post):
+    main_post = get_object_or_404(DidYouSee, id=id_post)
+    responses = DidYouSee.objects.filter(parent=main_post).exclude(id=main_post.id)
+
+    context = {
+        'main_post': main_post,
+        'responses': responses,
+        }
+
+    return render(request, 'figurines/post_detail.html', context)
+
+@login_required(login_url='/users/login/')
+def create_question(request, id_post=None):
     if request.method == 'POST':
         form = CustomCommentCreationForm(request.POST)
         if form.is_valid():
             annonce = form.save(commit=False)
             annonce.author = request.user
+            annonce.save()
+
+            if id_post:
+              post = get_object_or_404(DidYouSee, id=id_post)
+              annonce.parent = post
+              # Ici envoie de mail pour indiquer la reponse à un post.
+            else: 
+                annonce.parent = annonce
+
             annonce.save()
 
             return redirect('/figurines/did_you_see/')
@@ -65,7 +86,6 @@ def delete_figurine(request):
     if request.method == 'POST':
         user = request.user
         id_figurine = request.POST.get("id_figurine")
-        print(id_figurine)
         figurine = Figurine.objects.get(id=id_figurine)
         figurine.delete()
         return redirect('/figurines/collection/')

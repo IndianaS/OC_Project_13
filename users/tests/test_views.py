@@ -22,5 +22,8 @@ class UsersTestViews(TestCase):
                                         "password1": "PaswordOfTheTest&120",
                                         "password2": "PaswordOfTheTest&120"
                                     })
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('users/profile.html')
+
+    def test_user_del_user(self):
+        pass

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="page-section" id="post_detail">
+    <div class="container">
+        <div class="text-center">
+            <h3 class="section-subheading">Tu à vue une figurine ? alors répond à une annonces !</h3>
+            
+        </div>
+        <br>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        {{ main_post.author }} - {{ main_post.date }}
+                    </div>
+                    <div class="timeline-body">
+                        <h4>{{ main_post.title }}</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">{{ main_post.text }}</p>
+                    </div>
+                    <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom"
+                        href="{% url 'figurines:create_question' id_post=main_post.id %}"><i
+                            class="fas fa-check"></i>&nbsp Répondre</a>
+                </div>
+            </li>
+            {% for response in responses %}
+            <li class="timeline-inverted">
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        {{ response.author }} - {{ response.date }}
+                    </div>
+                    <div class="timeline-body">
+                        <h4>{{ response.title }}</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">{{ response.text }}</p>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock content %}
