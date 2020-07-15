@@ -31,11 +31,12 @@ def create_account(request):
 @login_required(login_url='/users/login/')
 def del_user(request):
     try:
-        user = User.objects.get('username')
-        user.delete()
-        print("Utilisateur supprimé")
-    
+        if not request.user.is_superuser:
+            username = request.user
+            user = User.objects.get(username=username)
+            user.delete()
+        
     except User.DoesNotExist:
         return redirect('/users/profile')
 
-    return redirect('')
+    return redirect('/')
