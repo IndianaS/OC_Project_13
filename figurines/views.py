@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
+from django.core.mail import EmailMessage
 
 from .forms import CustomAddFigurineCreationForm, CustomCommentCreationForm
 from .models import DidYouSee, Figurine
+
 
 @login_required(login_url='/users/login/')
 def add_figurine(request):
@@ -70,6 +72,10 @@ def create_question(request, id_post=None):
               post = get_object_or_404(DidYouSee, id=id_post)
               annonce.parent = post
               # Ici envoie de mail pour indiquer la reponse à un post.
+              mail_user = annonce.author.email
+              mail = EmailMessage("Bonjour", "Une Réponse a été posté sur votre commentaire de recherche !", to=[mail_user])
+              mail.send()
+
             else: 
                 annonce.parent = annonce
 

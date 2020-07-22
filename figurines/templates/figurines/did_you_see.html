@@ -6,23 +6,27 @@
 <section class="page-section" id="didyousee">
     <div class="container">
         <div class="text-center">
-            <h3 class="section-subheading">Tu cherche une figurine ? alors poste une annonces !</h3>
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'figurines:create_question' %}">Ajouter une annonce</a>
+            <h3 class="textcustom text-muted">Tu cherche une figurine ? alors poste une annonces !</h3>
+            <h3 class="textcustom text-muted">Ou répond à un utilisateur ! tu à juste à cliquer sur le titre de l'annonce .</h3>
+            <br>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'figurines:create_question' %}">Ajouter une annonce</a>
         </div>
         <br>
-        <ul class="timeline">
+        <div class="text-center" style="list-style-type:none">
             {% for question in questions %}
             <li>
                 <div class="timeline-panel">
                     <div class="timeline-heading">
                         {{ question.author }} - {{ question.date }}
                     </div>
-                    <div class="timeline-body"><h4><a href="{% url 'figurines:post_detail' id_post=question.id %}#post_detail">{{question.title }}</a></h4></div>
+                    <div class="timeline-body"><h4><a href="{% url 'figurines:post_detail' id_post=question.id %}#post_detail" style="color:#33BEFF">{{question.title }}</a></h4></div>
                     <div class="timeline-body"><p class="text-muted">{{ question.text }}</p></div>
                 </div>
             </li>
+            <hr width="200px" color="#D89744">
+            <br>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 </section>
 {% endblock content %}

@@ -41,3 +41,9 @@ class FigurineTestViews(TestCase):
                                     })
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('figurines/did_you_see.html')
+    
+    def test_post_detail(self):
+        pass
+
+    def test_delete_figurine(self):
+        pass

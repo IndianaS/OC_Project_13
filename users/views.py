@@ -6,6 +6,7 @@ from figurines.models import Figurine
 from users.models import User
 from .forms import CustomUserCreationForm
 
+
 @login_required(login_url='/users/login/')
 def profile(request):
     """Django view profile page."""
@@ -40,3 +41,9 @@ def del_user(request):
         return redirect('/users/profile')
 
     return redirect('/')
+
+
+@login_required(login_url='/users/login/')
+def friends_list(request):
+    """Django view profile page."""
+    return render(request, 'users/friends_list.html')

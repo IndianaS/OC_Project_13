@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.42', '4b5c395a50d1.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.42', 'bd5448f13d7e.ngrok.io']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'figurines.apps.FigurinesConfig',
     'crispy_forms',
+    'friendship',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "mail.gandi.net"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('email_gmail')
-DEFAULT_FROM_EMAIL = os.getenv('email_gmail')
-EMAIL_HOST_PASSWORD = os.getenv('password_gmail')
+EMAIL_HOST_USER = os.getenv('email_collection_pop')
+DEFAULT_FROM_EMAIL = os.getenv('email_collection_pop')
+EMAIL_HOST_PASSWORD = os.getenv('password_collection_pop')

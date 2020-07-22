@@ -35,12 +35,13 @@
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Accueil</a></li>
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">Deconnexion</a>
-          </li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">Deconnexion</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:profile' %}#profile">Mon
               Compte</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger"
               href="{% url 'figurines:collection' %}#collection">Ma collection</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                href="{% url 'users:friends_list' %}">Liste d'amis</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger"
               href="{% url 'figurines:did_you_see' %}#didyousee">Qui à vue ?</a></li>
           {% else %}
