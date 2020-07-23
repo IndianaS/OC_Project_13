@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from friendship.models import Friend, Follow, Block
+from django.contrib.auth.models import User
 
 from figurines.models import Figurine
 from users.models import User
@@ -31,6 +33,7 @@ def create_account(request):
 
 @login_required(login_url='/users/login/')
 def del_user(request):
+    """Django view del user."""
     try:
         if not request.user.is_superuser:
             username = request.user
@@ -45,5 +48,5 @@ def del_user(request):
 
 @login_required(login_url='/users/login/')
 def friends_list(request):
-    """Django view profile page."""
+    """Django view friends list page."""
     return render(request, 'users/friends_list.html')
