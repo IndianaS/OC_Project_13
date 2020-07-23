@@ -71,9 +71,8 @@ def create_question(request, id_post=None):
             if id_post:
               post = get_object_or_404(DidYouSee, id=id_post)
               annonce.parent = post
-              # Ici envoie de mail pour indiquer la reponse à un post.
-              mail_user = annonce.author.email
-              mail = EmailMessage("Bonjour", "Une Réponse a été posté sur votre commentaire de recherche !", to=[mail_user])
+              mail_user = annonce.parent.author.email
+              mail = EmailMessage("Bonjour !", "Une Réponse a été posté sur votre commentaire de recherche !", to=[mail_user])
               mail.send()
 
             else: 
