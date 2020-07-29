@@ -99,15 +99,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <!-- Cookies JS-->
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
-        crossorigin="anonymous"></script> -->
-  <!-- <script src="jquery.ihavecookies.js"></script> -->
-  <!-- Contact form JS-->
-  <!-- <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script> -->
-  <!-- Core theme JS-->
+    <script type="text/javascript" src="{% static 'jquery.ihavecookies.js' %}"></script>
+    <script type="text/javascript">
+    var options = {
+        title: '&#x1F36A; Accepter les cookies et la politique de confidentialité ?',
+        message: 'En poursuivant la navigation sur le site, vous acceptez le dépôt de cookies et autres tags.',
+        delay: 600,
+        expires: 1,
+        link: '#privacy',
+        onAccept: function(){
+            var myPreferences = $.fn.ihavecookies.cookie();
+            console.log('Yay! The following preferences were saved...');
+            console.log(myPreferences);
+        },
+        uncheckBoxes: true,
+        acceptBtnLabel: 'Accepter les cookies',
+        moreInfoLabel: '',
+        cookieTypesTitle: 'Sélectionnez les cookies que vous souhaitez accepter',
+        fixedCookieTypeLabel: 'Essentiel',
+        fixedCookieTypeDesc: 'These are essential for the website to work correctly.'
+    }
+
+    $(document).ready(function() {
+        $('body').ihavecookies(options);
+
+        if ($.fn.ihavecookies.preference('marketing') === true) {
+            console.log('This should run because marketing is accepted.');
+        }
+
+        $('#ihavecookiesBtn').on('click', function(){
+            $('body').ihavecookies(options, 'reinit');
+        });
+    });
+
+    </script>
   <script src="{% static 'dist/js/scripts.js' %}"></script>
 </body>
 
