@@ -25,6 +25,10 @@
                     <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom"
                         href="{% url 'figurines:create_question' id_post=main_post.id %}"><i
                             class="fas fa-check"></i>&nbsp Répondre</a>
+                        <div>
+                            <br>
+                            <button  class="button-report">Signaler</button>
+                        </div>
                 </div>
             </li>
             {% for response in responses %}
@@ -38,6 +42,9 @@
                     </div>
                     <div class="timeline-body">
                         <p class="text-muted">{{ response.text }}</p>
+                    </div>
+                    <div>
+                        <button  class="button-report">Signaler</button>
                     </div>
                 </div>
             </li>
