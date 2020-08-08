@@ -47,3 +47,6 @@ class FigurineTestViews(TestCase):
 
     def test_delete_figurine(self):
         pass
+
+    def test_report_post(self):
+        pass

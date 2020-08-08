@@ -27,7 +27,8 @@
                             class="fas fa-check"></i>&nbsp Répondre</a>
                         <div>
                             <br>
-                            <button  class="button-report">Signaler</button>
+                            <a href="{% url 'figurines:report' id_post=main_post.id %}#report">
+                                <button  class="button-report">Signaler</button></a>
                         </div>
                 </div>
             </li>
@@ -44,7 +45,8 @@
                         <p class="text-muted">{{ response.text }}</p>
                     </div>
                     <div>
-                        <button  class="button-report">Signaler</button>
+                        <a href="{% url 'figurines:report' id_post=main_post.id %}#report">
+                            <button  class="button-report">Signaler</button></a>
                     </div>
                 </div>
             </li>

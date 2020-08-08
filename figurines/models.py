@@ -44,6 +44,7 @@ class DidYouSee(models.Model):
         blank=True,
         null=True,
         )
+    report = models.BooleanField(default=False)
 
     
     class Meta:

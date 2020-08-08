@@ -41,7 +41,6 @@ def search(request):
         redirect('/figurines/collection/')
     return render(request, 'figurines/search.html', {'figurines_list': figurines_list})
 
-
 @login_required(login_url='/users/login/')
 def did_you_see(request):
     questions = [ post for post in DidYouSee.objects.all() if post.id == post.parent.id ]
@@ -85,7 +84,6 @@ def create_question(request, id_post=None):
         form = CustomCommentCreationForm()
     return render(request, 'figurines/create_question.html', {'form': form})
 
-
 @login_required(login_url='/users/login/')
 def delete_figurine(request):
     if request.method == 'POST':
@@ -94,3 +92,12 @@ def delete_figurine(request):
         figurine = Figurine.objects.get(id=id_figurine)
         figurine.delete()
         return redirect('/figurines/collection/')
+
+def report(request, id_post):
+    post = get_object_or_404(DidYouSee, id=id_post)
+    post.report = True
+    post.save()
+    mail = EmailMessage("Urgent !", "Un post a été signaler !", to=['benjamin.rejaud@gmail.com'])
+    mail.send()
+    return render(request, 'figurines/report.html')
+
