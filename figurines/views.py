@@ -97,7 +97,6 @@ def report(request, id_post):
     post = get_object_or_404(DidYouSee, id=id_post)
     post.report = True
     post.save()
-    mail = EmailMessage("Urgent !", "Un post a été signaler !", to=['benjamin.rejaud@gmail.com'])
+    mail = EmailMessage("Urgent !", "Un post a été signalé !", to=['benjamin.rejaud@gmail.com'])
     mail.send()
     return render(request, 'figurines/report.html')
-
