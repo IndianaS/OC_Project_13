@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Ici un boutton ajouter un amis</h2>
-<h2>Ici la liste d'amis</h2>
+<hr width="200px" color="#D89744">
+<div class="text-center" id="friends-list">
+    <h3 class="textcustom text-muted">Recherche un amis via sont pseudo .</h3>
+        <div class="container">
+            <form action="{% url 'users:add_friend' %}" method="POST">
+                {% csrf_token %}
+
+                <input type="search" id="collection_user" class="collection_user" name="username">
+                <br>
+                <br>
+                <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
+
+            </form>
+        </div>
+</div>
+<hr width="200px" color="#D89744">
+
+<div class="text-center">
+    <h2>Ici la liste d'amis</h2>
+    {{ friends }}
+    <h2>Demandes d'amis</h2>
+    {{ friend_request_test }}
+    <h4>Ici bouton (valider) (refuser)</h4>
+</div>
 {% endblock content %}

@@ -1,8 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from friendship.models import Friend, Follow, Block
-from django.contrib.auth.models import User
 
 from figurines.models import Figurine
 from users.models import User
@@ -39,9 +38,9 @@ def del_user(request):
             username = request.user
             user = User.objects.get(username=username)
             user.delete()
-        
+
     except User.DoesNotExist:
-        return redirect('/users/profile')
+        return redirect('/users/profile/')
 
     return redirect('/')
 
@@ -49,4 +48,27 @@ def del_user(request):
 @login_required(login_url='/users/login/')
 def friends_list(request):
     """Django view friends list page."""
-    return render(request, 'users/friends_list.html')
+    friends = Friend.objects.friends(request.user)
+    friend_requests = Friend.objects.unrejected_requests(user=request.user)
+    friend_request_test = [ User.objects.get(pk=friend.from_user_id) for friend in friend_requests]
+
+    context = {
+        'friends': friends,
+        'friend_requests': friend_requests,
+        'friend_request_test': friend_request_test,
+
+        }
+
+    return render(request, 'users/friends_list.html', context)
+
+
+@login_required(login_url='/users/login/')
+def add_friend(request):
+    username = request.POST['username']
+    other_user = get_object_or_404(User, username=username)
+    add_friend = Friend.objects.add_friend(
+        request.user,
+        other_user
+        )
+    
+    return redirect('/users/friends_list/')
