@@ -50,12 +50,12 @@ def friends_list(request):
     """Django view friends list page."""
     friends = Friend.objects.friends(request.user)
     friend_requests = Friend.objects.unrejected_requests(user=request.user)
-    friend_request_test = [ User.objects.get(pk=friend.from_user_id) for friend in friend_requests]
+    friend_request_pending = [ User.objects.get(pk=friend.from_user_id) for friend in friend_requests]
 
     context = {
         'friends': friends,
         'friend_requests': friend_requests,
-        'friend_request_test': friend_request_test,
+        'friend_request_pending': friend_request_pending,
 
         }
 
