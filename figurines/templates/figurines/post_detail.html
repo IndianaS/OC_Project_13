@@ -22,13 +22,16 @@
                     <div class="timeline-body">
                         <p class="text-muted">{{ main_post.text }}</p>
                     </div>
-                    <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom"
-                        href="{% url 'figurines:create_question' id_post=main_post.id %}"><i
-                            class="fas fa-check"></i>&nbsp Répondre</a>
+                    <form action="{% url 'figurines:create_question' id_post=main_post.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Répondre</button>
+                    </form>
                         <div>
                             <br>
-                            <a href="{% url 'figurines:report' id_post=main_post.id %}#report">
-                                <button  class="button-report">Signaler</button></a>
+                            <form action="{% url 'figurines:report' id_post=main_post.id %}#report" method="post">
+                                {% csrf_token %}
+                                <button class="button-report" type="submit">Signaler</button>
+                            </form>
                         </div>
                 </div>
             </li>
@@ -45,8 +48,10 @@
                         <p class="text-muted">{{ response.text }}</p>
                     </div>
                     <div>
-                        <a href="{% url 'figurines:report' id_post=main_post.id %}#report">
-                            <button  class="button-report">Signaler</button></a>
+                        <form action="{% url 'figurines:report' id_post=main_post.id %}#report" method="post">
+                            {% csrf_token %}
+                            <button class="button-report" type="submit">Signaler</button>
+                        </form>
                     </div>
                 </div>
             </li>

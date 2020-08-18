@@ -1,7 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-
 
 <section class="page-section" id="profile">
     <div class="container">
@@ -19,12 +19,16 @@
                 <h3 class="textcustom text-muted">Email du compte : {{user.email}}</h3>
                 <h3 class="textcustom text-muted">Nom d'utilisateur : {{user.username}}</h3>
                 {% if user.is_superuser %}
-                    <a href="{% url 'admin:index' %}">
-                    <button  class="button-report">Espace Admin</button></a>
-                    <br>
+                    <form action="{% url 'admin:index' %}" method="post">
+                        {% csrf_token %}
+                        <button class="button-report" type="submit">Espace Admin</button>
+                    </form>
                 {% endif %}
                 <br>
-                <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" href="{% url 'users:del_user' %}">Supprimer mon compte</a>
+                <form action="{% url 'users:del_user' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Supprimer mon compte</button>
+                </form>
             </div>
             <div class="col-md-4">
             </div>
