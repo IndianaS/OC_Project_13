@@ -72,3 +72,12 @@ def add_friend(request):
         )
     
     return redirect('/users/friends_list/')
+
+
+@login_required(login_url='/users/login/')
+def accept_request(request):
+    username = request.user
+    other_user = get_object_or_404(User, username=username)
+    accept = Follow.objects.add_follower(request.user, other_user)
+
+    return redirect('/users/friends_list/')

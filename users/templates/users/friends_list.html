@@ -19,9 +19,15 @@
 
 <div class="text-center">
     <h2>Ici la liste d'amis</h2>
-    {{ friends }}
+    {% for friends in friends %}
+        {{ friends.username }}/
+    {% endfor %}  
     <h2>Demandes d'amis</h2>
     {{ friend_request_pending }}
     <h4>Ici bouton (valider) (refuser)</h4>
+    <form action="{% url 'users:accept_request' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Valider</button>
+    </form>
 </div>
 {% endblock content %}
