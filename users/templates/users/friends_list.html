@@ -11,23 +11,40 @@
                 <br>
                 <br>
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
-
             </form>
         </div>
 </div>
 <hr width="200px" color="#D89744">
 
 <div class="text-center">
+
     <h2>Ici la liste d'amis</h2>
-    {% for friends in friends %}
-        {{ friends.username }}/
+    {% for friend in friends %}
+        {{ friend.username }}/
+        <form action="{% url 'users:remove_friend' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="other_user_id" name="other_user_id" value="{{ friend.id }}">
+            <button type="submit"><i class="fas fa-trash"></i></button>
+          </form>
     {% endfor %}  
     <h2>Demandes d'amis</h2>
-    {{ friend_request_pending }}
-    <h4>Ici bouton (valider) (refuser)</h4>
-    <form action="{% url 'users:accept_request' %}" method="post">
+    {% for friend in friend_request_pending %}
+    {{ friend }}
+    <form name="friend_request" action="{% url 'users:accept_request' %}" method="post">
         {% csrf_token %}
-        <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit">Valider</button>
+        <input type="hidden" id="other_user_id" name="other_user_id" value="{{ friend.id }}">
+        <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit" name="accept" id="accept" value="Valider" onclick="acceptFunction()">
+        <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" style="background-color: #DE2F2F;" type="submit" name="reject" id="reject" value="Refuser" onclick="rejectFunction()">
+        <input type="hidden" id="user_choice" name="user_choice" value="">
     </form>
+    <script>
+        function acceptFunction(){
+            document.friend_request.user_choice.value  = "Accepted";
+        }
+        function rejectFunction(){
+            document.friend_request.user_choice.value  = "Rejected";
+        }
+    </script>
+    {% endfor %}
 </div>
 {% endblock content %}

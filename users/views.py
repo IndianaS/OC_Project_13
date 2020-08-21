@@ -1,10 +1,11 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from friendship.models import Friend, Follow, Block
+from django.shortcuts import get_object_or_404, redirect, render
+from friendship.models import Block, Follow, Friend, FriendshipRequest
 
 from figurines.models import Figurine
 from users.models import User
+
 from .forms import CustomUserCreationForm
 
 
@@ -76,8 +77,26 @@ def add_friend(request):
 
 @login_required(login_url='/users/login/')
 def accept_request(request):
-    username = request.user
-    other_user = get_object_or_404(User, username=username)
-    accept = Follow.objects.add_follower(request.user, other_user)
+    user = request.user
+    other_user_id = request.POST.get('other_user_id')
+    friend_request = FriendshipRequest.objects.get(from_user=other_user_id, to_user=user.id)
+    
+    user_choice = request.POST.get('user_choice')
+ 
+    if user_choice == "Accepted":
+        friend_request.accept()
+    else:
+        friend_request.reject()
+        friend_request.delete()
+
+    return redirect('/users/friends_list/')
+
+
+@login_required(login_url='/users/login/')
+def remove_friend(request):
+    user = request.user
+    other_user_id = request.POST.get('other_user_id')
+    other_user = get_object_or_404(User, id=other_user_id)
+    user_del = Friend.objects.remove_friend(request.user, other_user)
 
     return redirect('/users/friends_list/')
