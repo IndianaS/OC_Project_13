@@ -6,3 +6,6 @@ def home(request):
 
 def legal_notice(request):
     return render(request, 'collection_pop/legal_notice.html')
+
+def contact_us(request):
+    return render(request, 'collection_pop/contact_us.html')
