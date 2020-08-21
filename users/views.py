@@ -65,6 +65,7 @@ def friends_list(request):
 
 @login_required(login_url='/users/login/')
 def add_friend(request):
+    """Django view add friend"""
     username = request.POST['username']
     other_user = get_object_or_404(User, username=username)
     add_friend = Friend.objects.add_friend(
@@ -77,6 +78,7 @@ def add_friend(request):
 
 @login_required(login_url='/users/login/')
 def accept_request(request):
+    """Django view accept request add friend"""
     user = request.user
     other_user_id = request.POST.get('other_user_id')
     friend_request = FriendshipRequest.objects.get(from_user=other_user_id, to_user=user.id)
@@ -94,6 +96,7 @@ def accept_request(request):
 
 @login_required(login_url='/users/login/')
 def remove_friend(request):
+    """Django view remove friend the friend list"""
     user = request.user
     other_user_id = request.POST.get('other_user_id')
     other_user = get_object_or_404(User, id=other_user_id)

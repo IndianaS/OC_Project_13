@@ -9,6 +9,7 @@ from .models import DidYouSee, Figurine
 
 @login_required(login_url='/users/login/')
 def add_figurine(request):
+    """Django View add a figurine to his collection"""
     user = request.user
     if request.method == 'POST':
         form = CustomAddFigurineCreationForm(request.POST, request.FILES)
@@ -24,6 +25,7 @@ def add_figurine(request):
 
 @login_required(login_url='/users/login/')
 def collection_user(request):
+    """Django View from User Collection"""
     user = request.user
     figurines = user.figurine_set.all()
     return render(request, 'figurines/collection.html', {'figurines': figurines})
@@ -31,6 +33,7 @@ def collection_user(request):
 
 @login_required(login_url='/users/login/')
 def search(request):
+    """Django View collection figurine finder"""
     user = request.user
 
     if request.method == 'GET':
@@ -41,13 +44,17 @@ def search(request):
         redirect('/figurines/collection/')
     return render(request, 'figurines/search.html', {'figurines_list': figurines_list})
 
+
 @login_required(login_url='/users/login/')
 def did_you_see(request):
+    """Django View of the section that viewed"""
     questions = [ post for post in DidYouSee.objects.all() if post.id == post.parent.id ]
     return render(request, 'figurines/did_you_see.html', {'questions': questions})
 
+
 @login_required(login_url='/users/login/')
 def post_detail(request, id_post):
+    """Django View response to a figurine search"""
     main_post = get_object_or_404(DidYouSee, id=id_post)
     responses = DidYouSee.objects.filter(parent=main_post).exclude(id=main_post.id)
 
@@ -60,6 +67,7 @@ def post_detail(request, id_post):
 
 @login_required(login_url='/users/login/')
 def create_question(request, id_post=None):
+    """Django View for creating a question"""
     if request.method == 'POST':
         form = CustomCommentCreationForm(request.POST)
         if form.is_valid():
@@ -84,8 +92,10 @@ def create_question(request, id_post=None):
         form = CustomCommentCreationForm()
     return render(request, 'figurines/create_question.html', {'form': form})
 
+
 @login_required(login_url='/users/login/')
 def delete_figurine(request):
+    """Django deletion view of a figurine"""
     if request.method == 'POST':
         user = request.user
         id_figurine = request.POST.get("id_figurine")
@@ -94,6 +104,7 @@ def delete_figurine(request):
         return redirect('/figurines/collection/')
 
 def report(request, id_post):
+    """Django seen from a post"""
     post = get_object_or_404(DidYouSee, id=id_post)
     post.report = True
     post.save()
