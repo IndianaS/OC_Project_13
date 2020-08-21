@@ -11,12 +11,12 @@ from .forms import CustomUserCreationForm
 
 @login_required(login_url='/users/login/')
 def profile(request):
-    """Django view profile page."""
+    """Django view profile page"""
     return render(request, 'users/profile.html')
 
 
 def create_account(request):
-    """Django view account creation."""
+    """Django view account creation"""
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -33,7 +33,7 @@ def create_account(request):
 
 @login_required(login_url='/users/login/')
 def del_user(request):
-    """Django view del user."""
+    """Django view del user"""
     try:
         if not request.user.is_superuser:
             username = request.user
@@ -48,7 +48,7 @@ def del_user(request):
 
 @login_required(login_url='/users/login/')
 def friends_list(request):
-    """Django view friends list page."""
+    """Django view friends list page"""
     friends = Friend.objects.friends(request.user)
     friend_requests = Friend.objects.unrejected_requests(user=request.user)
     friend_request_pending = [ User.objects.get(pk=friend.from_user_id) for friend in friend_requests]
