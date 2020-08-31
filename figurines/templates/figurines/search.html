@@ -22,7 +22,7 @@
                                     <div class="textcustomfigurine">Nom de la figurine: {{ figurine.name }}</div>
                                     <div class="textcustomfigurine">Numéro de la figurine: {{ figurine.figurine_number }}</div>
                                     <form action="{% url 'figurines:delete_figurine' %}" method="POST">{% csrf_token %}<button
-                                        type="submit"><i class="fas fa-trash"></i></i>
+                                        class="button-del" type="submit"><i class="fa fa-times" aria-hidden="true"></i></i>
                                     </button>&nbsp Supprimer
                                     <input type="hidden" id="id_figurine" name="id_figurine" value="{{ figurine.pk }}">
                                     </form>

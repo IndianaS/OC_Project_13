@@ -10,7 +10,8 @@
         <div class="container">
             <form action="{% url 'users:add_friend' %}" method="POST">
                 {% csrf_token %}
-                <input type="search" id="collection_user" class="collection_user" name="username" placeholder="Entre un pseudo">
+                <input type="search" id="collection_user" class="collection_user" name="username"
+                    placeholder="Entre un pseudo">
                 <br>
                 <br>
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
@@ -18,61 +19,66 @@
         </div>
     </div>
     <br>
-    <div class="container" style="border-radius: 10px; background-color: gainsboro;">
+    <div class="container box-shadow">
         <div>
             <br>
             <h2>Liste d'amis :</h2>
         </div>
-        <hr max-width="700px" color="#29A4FE">
         <br>
+        {% for friend in friends %}
         <div class="row">
-            {% for friend in friends %}
-            <div class="col-lg-6 col-sm-6 col-xs-6 text-center">
-                <h3 class="textcustom">{{ friend.username }}</h3>
+            <div class="col text-center">
+                <p class="textcustom">{{ friend.username }}</p>
             </div>
-            <div class="col-lg-offset-2 col-sm-offset-2 col-xs-6">
+            <div class="col text-center">
                 <form action="{% url 'users:remove_friend' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" id="other_user_id" name="other_user_id" value="{{ friend.id }}">
-                    <button type="submit"><i class="fas fa-trash"></i></button>
+                    <button class="button-del" type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </form>
             </div>
-            <hr width="700px" color= "#B7B2B2">
-            {% endfor %}
         </div>
+        {% endfor %}
+
     </div>
 </div>
+
 <br>
-<div class="container" style="border-radius: 10px;">
+<div class="container">
     <div>
         <br>
         <h2>Demandes d'amis :</h2>
     </div>
     <hr max-width="700px" color="#29A4FE">
     <br>
+
+    {% for friend in friend_request_pending %}
     <div class="row">
-        {% for friend in friend_request_pending %}
-        <div class="col-lg-6 col-sm-6 col-xs-6 text-center">
-            <h3 class="textcustom">{{ friend }}</h3>
+        <div class="col text-center">
+            <p class="textcustom">{{ friend }}</p>
         </div>
-        <div class="col-lg-offset-2 col-sm-offset-2 col-xs-6">
+        <div class="col text-center">
             <form name="friend_request" action="{% url 'users:accept_request' %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" id="other_user_id" name="other_user_id" value="{{ friend.id }}">
-                <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit" name="accept" id="accept" value="Valider" onclick="acceptFunction()">
-                <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" style="background-color: #DE2F2F;" type="submit" name="reject" id="reject" value="Refuser" onclick="rejectFunction()">
+                <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" type="submit"
+                    name="accept" id="accept" value="Valider" onclick="acceptFunction()">
+                <input class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom"
+                    style="background-color: #DE2F2F;" type="submit" name="reject" id="reject" value="Refuser"
+                    onclick="rejectFunction()">
                 <input type="hidden" id="user_choice" name="user_choice" value="">
             </form>
             <script>
-                function acceptFunction(){
-                    document.friend_request.user_choice.value  = "Accepted";
+                function acceptFunction() {
+                    document.friend_request.user_choice.value = "Accepted";
                 }
-                function rejectFunction(){
-                    document.friend_request.user_choice.value  = "Rejected";
+                function rejectFunction() {
+                    document.friend_request.user_choice.value = "Rejected";
                 }
             </script>
+            <br>
         </div>
-        <hr width="700px" color= "#B7B2B2">
+        </div>
         {% endfor %}
 
     </div>
