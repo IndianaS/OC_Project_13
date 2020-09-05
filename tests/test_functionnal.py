@@ -18,16 +18,13 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
 
         User = get_user_model()
         User.objects.create_user(
-            username="UserTest", password="PasswordTest&")
+            username="UserTest", password="PasswordTest&7722")
 
     def test_user_can_connect_and_disconnect(self):
-        self.driver.find_element_by_link_text("Connexion").click()
-        self.driver.find_element_by_css_selector(
-            "#id_username").send_keys("UserTest")
-        self.driver.find_element_by_css_selector(
-            "#id_password").send_keys("PasswordTest&")
-        self.driver.find_element_by_css_selector("#button-submit").click()
-        logout = self.driver.find_element_by_link_text("Deconnexion").click()
-        logout_classes = logout.get_attribute("class")
-        self.assertIn("fa-sign-out-alt", logout_classes,
-                      "Disconnect icon should be available.")
+        self.driver.find_element_by_id("login-link").click()
+        self.driver.find_element_by_id(
+            "id_username").send_keys("UserTest")
+        self.driver.find_element_by_id(
+            "id_password").send_keys("PasswordTest&7722")
+        self.driver.find_element_by_id("button-submit").click()
+        logout = self.driver.find_element_by_id("logout-link").click()

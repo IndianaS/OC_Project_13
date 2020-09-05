@@ -36,7 +36,7 @@
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Accueil</a></li>
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">Deconnexion</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" id="logout-link" href="{% url 'users:logout' %}">Deconnexion</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:profile' %}#profile">Mon
               Compte</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -46,7 +46,7 @@
           <li class="nav-item"><a class="nav-link js-scroll-trigger"
               href="{% url 'figurines:did_you_see' %}#didyousee">Qui à vue ?</a></li>
           {% else %}
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}#login">Connexion</a>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" id="login-link" href="{% url 'users:login' %}#login">Connexion</a>
           </li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'users:create_account' %}">Créer mon
               compte</a></li>
@@ -95,6 +95,7 @@
     </div>
   </footer>
   {% endblock footer %}
+  {% block bottom_script %}
   <!-- Bootstrap core JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
@@ -138,6 +139,7 @@
 
     </script>
   <script src="{% static 'dist/js/scripts.js' %}"></script>
+{% endblock bottom_script %}
 </body>
 
 </html>

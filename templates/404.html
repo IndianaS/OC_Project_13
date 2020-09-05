@@ -1,15 +1,20 @@
 
-{% load static %}
-{% block content %}
+{% extends "base.html" %}
 
-<section>
+{% block content %}
+<section class="page-section" id="main-content">
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h3>La page est introuvable !</h3>
-                <h3>Retour à la page <a href="{% url 'home' %}">d'accueil .</a></h3>
-            </div>
+        <div class="text-center">
+            <h3>La page est introuvable !</h3>
+            <h3>Retour à la page <a href="{% url 'home' %}">d'accueil .</a></h3>
         </div>
     </div>
 </section>
 {% endblock content %}
+
+{% block bottom_script %}
+{{ block.super }}
+<script>
+    window.location.href="#main-content";
+</script>
+{% endblock bottom_script %}

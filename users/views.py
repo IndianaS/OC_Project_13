@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from friendship.models import Block, Follow, Friend, FriendshipRequest
 
 from figurines.models import Figurine
@@ -51,14 +51,21 @@ def friends_list(request):
     """Django view friends list page"""
     friends = Friend.objects.friends(request.user)
     friend_requests = Friend.objects.unrejected_requests(user=request.user)
-    friend_request_pending = [ User.objects.get(pk=friend.from_user_id) for friend in friend_requests]
+    friend_request_pending = [User.objects.get(
+        pk=friend.from_user_id) for friend in friend_requests]
+
+    try:
+        user_not_found = request.session['user_not_found']
+        del request.session['user_not_found']
+    except KeyError:
+        user_not_found = None
 
     context = {
         'friends': friends,
         'friend_requests': friend_requests,
         'friend_request_pending': friend_request_pending,
-
-        }
+        'user_not_found': user_not_found
+    }
 
     return render(request, 'users/friends_list.html', context)
 
@@ -66,13 +73,18 @@ def friends_list(request):
 @login_required(login_url='/users/login/')
 def add_friend(request):
     """Django view add friend"""
-    username = request.POST['username']
-    other_user = get_object_or_404(User, username=username)
-    add_friend = Friend.objects.add_friend(
-        request.user,
-        other_user
+    try:
+        username = request.POST['username']
+        other_user = User.objects.get(username=username)
+        add_friend = Friend.objects.add_friend(
+            request.user,
+            other_user
         )
-    
+
+    except User.DoesNotExist:
+        request.session['user_not_found'] = f'Utilisateur "{username}" inconnu.'
+        return redirect(reverse('users:friends_list'))
+
     return redirect('/users/friends_list/')
 
 
@@ -81,10 +93,11 @@ def accept_request(request):
     """Django view accept request add friend"""
     user = request.user
     other_user_id = request.POST.get('other_user_id')
-    friend_request = FriendshipRequest.objects.get(from_user=other_user_id, to_user=user.id)
-    
+    friend_request = FriendshipRequest.objects.get(
+        from_user=other_user_id, to_user=user.id)
+
     user_choice = request.POST.get('user_choice')
- 
+
     if user_choice == "Accepted":
         friend_request.accept()
     else:

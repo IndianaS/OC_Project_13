@@ -16,6 +16,9 @@
                 <br>
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
             </form>
+            {% if user_not_found %}
+                {{ user_not_found }}
+            {% endif %}
         </div>
     </div>
     <br>
@@ -78,10 +81,10 @@
             </script>
             <br>
         </div>
-        </div>
-        {% endfor %}
-
     </div>
+    {% endfor %}
+
+</div>
 </div>
 
 {% endblock content %}
