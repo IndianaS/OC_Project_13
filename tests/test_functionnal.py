@@ -49,6 +49,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_id(
             "button-submit-addfigurine").click()
 
+
     def test_search_friend(self):
         self.driver.find_element_by_id("login-link").click()
         self.driver.find_element_by_id(
