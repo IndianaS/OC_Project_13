@@ -1,40 +1,31 @@
 from django import forms
-from django.contrib.auth import get_user_model
 from django.forms import ModelForm
-from figurines.models import Category, Figurine, DidYouSee
+
+from figurines.models import Category, DidYouSee, Figurine
 
 
 class CustomAddFigurineCreationForm(ModelForm):
     name = forms.CharField(
         label="Nom de la figurine",
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Nom de la figurine *'
-            })
+        widget=forms.TextInput(attrs={'placeholder': 'Nom de la figurine *'}),
     )
 
     figurine_number = forms.IntegerField(
         label="Numéro de la figurine",
         widget=forms.NumberInput(
-            attrs={
-                'placeholder': 'Numéro de la figurine *'
-            })
+            attrs={'placeholder': 'Numéro de la figurine *'}
+        ),
     )
 
     category = forms.CharField(
         label="Categorie de la figurine",
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Catégorie *'
-            })
+        widget=forms.TextInput(attrs={'placeholder': 'Catégorie *'}),
     )
 
     picture_figurine = forms.ImageField(
         label="Photo de la figurine",
         required=False,
-        widget=forms.FileInput(
-            attrs={'class': 'input-file'}
-        )
+        widget=forms.FileInput(attrs={'class': 'input-file'}),
     )
 
     class Meta:
@@ -56,19 +47,20 @@ class CustomCommentCreationForm(ModelForm):
     title = forms.CharField(
         label="Titre",
         widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Titre *'
-            }))
+            attrs={'class': 'form-control', 'placeholder': 'Titre *'}
+        ),
+    )
 
     text = forms.CharField(
         label="Titre",
         widget=forms.Textarea(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Texte *'
-            }))
+            attrs={'class': 'form-control', 'placeholder': 'Texte *'}
+        ),
+    )
 
     class Meta:
         model = DidYouSee
-        fields = ("title", "text",)
+        fields = (
+            "title",
+            "text",
+        )

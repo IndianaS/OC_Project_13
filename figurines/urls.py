@@ -1,4 +1,3 @@
-from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from . import views
@@ -12,7 +11,11 @@ urlpatterns = [
     path("did_you_see/", views.did_you_see, name="did_you_see"),
     path("post_detail/<int:id_post>/", views.post_detail, name="post_detail"),
     path("create_question/", views.create_question, name="create_question"),
-    path("create_question/<int:id_post>/", views.create_question, name="create_question"),
+    path(
+        "create_question/<int:id_post>/",
+        views.create_question,
+        name="create_question",
+    ),
     path("delete_figurine/", views.delete_figurine, name="delete_figurine"),
     path("report_post/<int:id_post>/", views.report, name="report"),
 ]

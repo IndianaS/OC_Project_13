@@ -11,7 +11,11 @@ urlpatterns = [
         auth_views.LoginView.as_view(template_name="users/login.html"),
         name="login",
     ),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout",),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(),
+        name="logout",
+    ),
     path("profile/", views.profile, name="profile"),
     path("create_account/", views.create_account, name="create_account"),
     path("del_user/", views.del_user, name="del_user"),
@@ -19,4 +23,10 @@ urlpatterns = [
     path("add_friend/", views.add_friend, name="add_friend"),
     path("accept_request/", views.accept_request, name="accept_request"),
     path("remove_friend/", views.remove_friend, name="remove_friend"),
+    path("friends_figurine/", views.friends_figurine, name="friends_figurine"),
+    path(
+        "friends_figurine_search/",
+        views.friends_figurine_search,
+        name="friends_figurine_search",
+    ),
 ]

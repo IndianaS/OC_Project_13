@@ -1,13 +1,12 @@
+from django.contrib.auth.views import LoginView
+from django.shortcuts import reverse
 from django.test import TestCase
 from django.urls import resolve
-from django.shortcuts import reverse
 
-from django.contrib.auth.views import LoginView
-from users.views import profile, create_account
+from users.views import create_account, profile
 
 
 class UrlTestCase(TestCase):
-
     def test_user_url_login(self):
         found = resolve(reverse("users:login"))
         self.assertEqual(found.func.view_class, LoginView)

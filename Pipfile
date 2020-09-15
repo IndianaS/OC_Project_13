@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 ipython = "*"
 autopep8 = "*"
+black = "*"
+isort = {extras = ["pipfile", "requirements"],version = "*"}
 
 [packages]
 django = "*"
@@ -21,3 +23,6 @@ django-friendship = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

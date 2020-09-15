@@ -51,8 +51,9 @@ def friends_list(request):
     """Django view friends list page"""
     friends = Friend.objects.friends(request.user)
     friend_requests = Friend.objects.unrejected_requests(user=request.user)
-    friend_request_pending = [User.objects.get(
-        pk=friend.from_user_id) for friend in friend_requests]
+    friend_request_pending = [
+        User.objects.get(pk=friend.from_user_id) for friend in friend_requests
+    ]
 
     try:
         user_not_found = request.session['user_not_found']
@@ -64,7 +65,7 @@ def friends_list(request):
         'friends': friends,
         'friend_requests': friend_requests,
         'friend_request_pending': friend_request_pending,
-        'user_not_found': user_not_found
+        'user_not_found': user_not_found,
     }
 
     return render(request, 'users/friends_list.html', context)
@@ -76,13 +77,12 @@ def add_friend(request):
     try:
         username = request.POST['username']
         other_user = User.objects.get(username=username)
-        add_friend = Friend.objects.add_friend(
-            request.user,
-            other_user
-        )
+        add_friend = Friend.objects.add_friend(request.user, other_user)
 
     except User.DoesNotExist:
-        request.session['user_not_found'] = f'Utilisateur "{username}" inconnu.'
+        request.session[
+            'user_not_found'
+        ] = f'Utilisateur "{username}" inconnu.'
         return redirect(reverse('users:friends_list'))
 
     return redirect('/users/friends_list/')
@@ -94,7 +94,8 @@ def accept_request(request):
     user = request.user
     other_user_id = request.POST.get('other_user_id')
     friend_request = FriendshipRequest.objects.get(
-        from_user=other_user_id, to_user=user.id)
+        from_user=other_user_id, to_user=user.id
+    )
 
     user_choice = request.POST.get('user_choice')
 
@@ -116,3 +117,14 @@ def remove_friend(request):
     user_del = Friend.objects.remove_friend(request.user, other_user)
 
     return redirect('/users/friends_list/')
+
+
+@login_required(login_url='/users/login/')
+def friends_figurine(request):
+    return render(request, 'users/friends_figurine.html')
+
+
+@login_required(login_url='/users/login/')
+def friends_figurine_search(request):
+
+    return render(request, 'users/friends_figurine_search.html')

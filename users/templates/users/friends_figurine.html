@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section" id="collection-friends">
+    <div class="container">
+        <div class="text-center">
+            <h3 class="textcustom text-muted">Recherches les figurines dans la collection d'un amis.</h3>
+            <br>
+            <form action="{% url 'figurines:search' %}#search" method="get">
+                <div>
+                <input type="search" id="collection_friends" class="collection_user" name="q">
+                <br>
+                <br>
+                <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
