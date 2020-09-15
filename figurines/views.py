@@ -1,4 +1,3 @@
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render

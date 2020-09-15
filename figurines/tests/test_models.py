@@ -1,7 +1,6 @@
 from django.test import TestCase
 
-from figurines.models import Category, DidYouSee, Figurine
-from users.models import User
+from figurines.models import Category, Figurine
 
 
 class FigurineTestsModels(TestCase):

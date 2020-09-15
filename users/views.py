@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from friendship.models import Block, Follow, Friend, FriendshipRequest
+from friendship.models import Friend, FriendshipRequest
 
 from figurines.models import Figurine
 from users.models import User
