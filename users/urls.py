@@ -23,7 +23,7 @@ urlpatterns = [
     path("add_friend/", views.add_friend, name="add_friend"),
     path("accept_request/", views.accept_request, name="accept_request"),
     path("remove_friend/", views.remove_friend, name="remove_friend"),
-    path("friends_figurine/", views.friends_figurine, name="friends_figurine"),
+    path("friends_figurine/<int:id>", views.friends_figurine, name="friends_figurine"),
     path(
         "friends_figurine_search/",
         views.friends_figurine_search,

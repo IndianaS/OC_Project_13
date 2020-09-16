@@ -31,7 +31,7 @@
         {% for friend in friends %}
         <div class="row">
             <div class="col text-center">
-                <p><a class="textcustom textcolorcustom" href="{% url 'users:friends_figurine' %}#collection-friends">{{ friend.username }}</a></p>
+                <p><a class="textcustom textcolorcustom" href="{% url 'users:friends_figurine' friend.id %}#collection-friends">{{ friend.username }}</a></p>
             </div>
             <div class="col text-center">
                 <form action="{% url 'users:remove_friend' %}" method="post">

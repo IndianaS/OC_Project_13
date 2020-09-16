@@ -120,11 +120,28 @@ def remove_friend(request):
 
 
 @login_required(login_url='/users/login/')
-def friends_figurine(request):
-    return render(request, 'users/friends_figurine.html')
+def friends_figurine(request, id):
+    friend = get_object_or_404(User, id=id)
+    return render(request, 'users/friends_figurine.html', {'friend': friend})
 
 
 @login_required(login_url='/users/login/')
 def friends_figurine_search(request):
+    if request.method == 'GET':
+        id = request.GET['friend_id']
+        query = request.GET['q']
+        friends_selected = User.objects.get(id=id)
+    else:
+        return redirect('/users/friends_list/')
 
-    return render(request, 'users/friends_figurine_search.html')
+    if Friend.objects.are_friends(request.user, friends_selected):
+        figurines_list = friends_selected.figurine_set.filter(
+            name__icontains=query)
+        return render(
+            request,
+            'users/friends_figurine_search.html',
+            {'figurines_list': figurines_list}
+        )
+
+    else:
+        return redirect('/users/friends_list/')

@@ -3,13 +3,14 @@
 <section class="page-section" id="collection-friends">
     <div class="container">
         <div class="text-center">
-            <h3 class="textcustom text-muted">Recherches les figurines dans la collection d'un amis.</h3>
+            <h3 class="textcustom text-muted">Recherches une figurine dans la collection de {{ friend.username }} via le nom de la figurine.</h3>
             <br>
-            <form action="{% url 'figurines:search' %}#search" method="get">
+            <form action="{% url 'users:friends_figurine_search' %}#search" method="get">
                 <div>
                 <input type="search" id="collection_friends" class="collection_user" name="q">
                 <br>
                 <br>
+                <input type="hidden" id="friend_id" class="collection_user" name="friend_id" value="{{ friend.id }}">
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Rechercher</button>
                 </div>
             </form>

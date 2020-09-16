@@ -10,7 +10,6 @@ chrome_options.headless = False
 class ChromeFunctionalTestCases(StaticLiveServerTestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
-        self.driver.get(self.live_server_url)
 
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
@@ -21,6 +20,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         )
 
     def test_user_can_connect_and_disconnect(self):
+        self.driver.get(self.live_server_url)
         self.driver.find_element_by_id("login-link").click()
         self.driver.find_element_by_id("id_username").send_keys("UserTest")
         self.driver.find_element_by_id("id_password").send_keys(
@@ -30,6 +30,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         logout = self.driver.find_element_by_id("logout-link").click()
 
     def test_user_add_figurine(self):
+        self.driver.get(self.live_server_url + "/figurines/add_figurine")
         self.driver.find_element_by_id("login-link").click()
         self.driver.find_element_by_id("id_username").send_keys("UserTest")
         self.driver.find_element_by_id("id_password").send_keys(
@@ -45,6 +46,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_id("button-submit-addfigurine").click()
 
     def test_search_friend(self):
+        self.driver.get(self.live_server_url + "/users/friends_list")
         self.driver.find_element_by_id("login-link").click()
         self.driver.find_element_by_id("id_username").send_keys("UserTest")
         self.driver.find_element_by_id("id_password").send_keys(
@@ -53,7 +55,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_id("button-submit").click()
 
         self.driver.find_element_by_id("id-friends-list").click()
-        self.driver.find_element_by_id("id_collection_user").send_keys(
+        self.driver.find_element_by_id("collection_user").send_keys(
             "UserAddTest"
         )
         self.driver.find_element_by_id("search-friend").click()
