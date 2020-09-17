@@ -54,7 +54,10 @@ class FigurineTestViews(TestCase):
         self.assertTemplateUsed('figurines/did_you_see.html')
 
     def test_delete_figurine(self):
-        pass
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.get('/figurines/collection/?q=logan')
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('figurines/collection.html')
 
     def test_report_post(self):
         self.client.login(username="UserTest", password="PaswordOfTheTest&120")
