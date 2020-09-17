@@ -42,10 +42,28 @@ class FigurineTestViews(TestCase):
         self.assertTemplateUsed('figurines/did_you_see.html')
 
     def test_post_detail(self):
-        pass
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.post(
+            "/figurines/create_question/51/",
+            {
+                "title": "Je recherche batman",
+                "text": "Bonjour, j'ai trouvé Batman",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('figurines/did_you_see.html')
 
     def test_delete_figurine(self):
         pass
 
     def test_report_post(self):
-        pass
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.post(
+            "/figurines/post_detail/51/",
+            {
+                "title": "Je recherche batman",
+                "text": "Bonjour, j'ai trouvé Batman",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('figurines/report_post.html')
