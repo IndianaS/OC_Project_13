@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('key', 'Tw5LGlyY7dLNYQBl7XT4-rAjm49rdxNMCgu7yfPSEI9cLu9kafKZV0RJfyd3XXGH')
+SECRET_KEY = os.getenv('KEY', 'Tw5LGlyY7dLNYQBl7XT4-rAjm49rdxNMCgu7yfPSEI9cLu9kafKZV0RJfyd3XXGH')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'collection_pop',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('postgresql_password'),
+        'USER': os.getenv('POSTGRESQL_USER'),
+        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -139,6 +139,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "mail.gandi.net"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('email_collection_pop')
-DEFAULT_FROM_EMAIL = os.getenv('email_collection_pop')
-EMAIL_HOST_PASSWORD = os.getenv('password_collection_pop')
+EMAIL_HOST_USER = os.getenv('EMAIL_COLLECTION_POP')
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_COLLECTION_POP')
+EMAIL_HOST_PASSWORD = os.getenv('PASSWORD_COLLECTION_POP')

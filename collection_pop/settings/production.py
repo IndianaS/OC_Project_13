@@ -10,8 +10,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'collection_pop',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('postgresql_password'),
+        'USER': os.getenv('POSTGRESQL_USER'),
+        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
