@@ -1,9 +1,9 @@
-from. import *
+from . import *
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.42', 'collectionpop.fr']
+ALLOWED_HOSTS = ['www.collectionpop.fr', 'collectionpop.fr']
 DEBUG = False
 
 DATABASES = {
