@@ -6,6 +6,9 @@
 <div class="container">
     <br>
     <div class="text-center" id="friends-list">
+        {% if user_not_found %}
+            {{ user_not_found }}
+        {% endif %}
         <h3 class="textcustom text-muted">Recherche un amis via sont pseudo .</h3>
         <div class="container">
             <form action="{% url 'users:add_friend' %}" method="POST">
@@ -16,9 +19,6 @@
                 <br>
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" id="search-friend">Rechercher</button>
             </form>
-            {% if user_not_found %}
-                {{ user_not_found }}
-            {% endif %}
         </div>
     </div>
     <br>
