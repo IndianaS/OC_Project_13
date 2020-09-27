@@ -17,6 +17,13 @@
                 </div>
             </form>
             <br>
+            <form action="{% url 'figurines:search' %}#search" method="get">
+                <div>
+                <input type="hidden" id="collection_user" class="collection_user" name="q">
+                <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Voir la collection complète</button>
+                </div>
+            </form>
+            <br>
             <a class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom" id="id-addfigurine" href="{% url 'figurines:add_figurine' %}#addfigurine">Ajouter une figurine à la collection</a>
         </div>
     </div>
