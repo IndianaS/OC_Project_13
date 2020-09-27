@@ -12,6 +12,9 @@
         {% if user_found %}
             {{ user_found }}
         {% endif %}
+        {% if user_already_added %}
+            {{ user_already_added }}
+        {% endif %}
         <h3 class="textcustom text-muted">Recherche un amis via sont pseudo .</h3>
         <div class="container">
             <form action="{% url 'users:add_friend' %}" method="POST">
