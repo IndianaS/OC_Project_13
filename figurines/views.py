@@ -38,10 +38,12 @@ def search(request):
     user = request.user
 
     if request.method == 'GET':
-        query = request.GET['q']
-        figurines_list = user.figurine_set.filter(name__icontains=query)
+        if request.GET.get('all'):
+            figurines_list = user.figurine_set.all()
+        else:
+            query = request.GET['q']
+            figurines_list = user.figurine_set.filter(name__icontains=query)
     else:
-        print('Pas de requête')
         redirect('/figurines/collection/')
     return render(
         request, 'figurines/search.html', {'figurines_list': figurines_list}
