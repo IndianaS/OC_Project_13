@@ -56,6 +56,12 @@ def friends_list(request):
     ]
 
     try:
+        user_found = request.session['user_found']
+        del request.session['user_found']
+    except KeyError:
+        user_found = None
+
+    try:
         user_not_found = request.session['user_not_found']
         del request.session['user_not_found']
     except KeyError:
@@ -66,6 +72,7 @@ def friends_list(request):
         'friend_requests': friend_requests,
         'friend_request_pending': friend_request_pending,
         'user_not_found': user_not_found,
+        'user_found': user_found,
     }
 
     return render(request, 'users/friends_list.html', context)
@@ -78,6 +85,9 @@ def add_friend(request):
         username = request.POST['username']
         other_user = User.objects.get(username=username)
         add_friend = Friend.objects.add_friend(request.user, other_user)
+        request.session[
+            'user_found'
+            ] = f"Demande d'amis envoyée !"
 
     except User.DoesNotExist:
         request.session[
