@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from figurines.models import Figurine
+from friendship.exceptions import AlreadyExistsError
 from friendship.models import Friend, FriendshipRequest
 
-from figurines.models import Figurine
 from users.models import User
 
 from .forms import CustomUserCreationForm
@@ -56,16 +57,30 @@ def friends_list(request):
     ]
 
     try:
+        user_found = request.session['user_found']
+        del request.session['user_found']
+    except KeyError:
+        user_found = None
+
+    try:
         user_not_found = request.session['user_not_found']
         del request.session['user_not_found']
     except KeyError:
         user_not_found = None
+    
+    try:
+        user_already_added = request.session['user_already_added']
+        del request.session['user_already_added']
+    except KeyError:
+        user_already_added = None
 
     context = {
         'friends': friends,
         'friend_requests': friend_requests,
         'friend_request_pending': friend_request_pending,
         'user_not_found': user_not_found,
+        'user_found': user_found,
+        'user_already_added': user_already_added,
     }
 
     return render(request, 'users/friends_list.html', context)
@@ -78,12 +93,20 @@ def add_friend(request):
         username = request.POST['username']
         other_user = User.objects.get(username=username)
         add_friend = Friend.objects.add_friend(request.user, other_user)
+        request.session[
+            'user_found'
+            ] = f"Demande d'amis envoyée !"
 
     except User.DoesNotExist:
         request.session[
             'user_not_found'
         ] = f'Utilisateur "{username}" inconnu.'
         return redirect(reverse('users:friends_list'))
+    
+    except AlreadyExistsError:
+        request.session[
+            'user_already_added'
+            ] = f"La demande à déjà été envoyée !"
 
     return redirect('/users/friends_list/')
 
