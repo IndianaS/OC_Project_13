@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from figurines.models import Figurine
-from friendship.exceptions import AlreadyExistsError
+from friendship.exceptions import AlreadyExistsError, AlreadyFriendsError
 from friendship.models import Friend, FriendshipRequest
 
 from users.models import User
@@ -104,6 +104,11 @@ def add_friend(request):
         return redirect(reverse('users:friends_list'))
     
     except AlreadyExistsError:
+        request.session[
+            'user_already_added'
+            ] = f"La demande à déjà été envoyée !"
+    
+    except AlreadyFriendsError:
         request.session[
             'user_already_added'
             ] = f"La demande à déjà été envoyée !"
