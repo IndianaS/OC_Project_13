@@ -1,5 +1,6 @@
 # - P13 Collection Pop .
 
-# - Application
+# - Application web Python/Django:
+
 # -
 # -
