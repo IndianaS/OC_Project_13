@@ -155,16 +155,18 @@ def friends_figurine(request, id):
 
 @login_required(login_url='/users/login/')
 def friends_figurine_search(request):
-    if request.method == 'GET':
-        id = request.GET['friend_id']
-        query = request.GET['q']
-        friends_selected = User.objects.get(id=id)
-    else:
-        return redirect('/users/friends_list/')
+    id = request.GET['friend_id']
+    friends_selected = User.objects.get(id=id)
 
     if Friend.objects.are_friends(request.user, friends_selected):
-        figurines_list = friends_selected.figurine_set.filter(
-            name__icontains=query)
+        if request.GET.get('q'):
+            query = request.GET['q']
+            figurines_list = friends_selected.figurine_set.filter(name__icontains=query)
+        elif request.GET.get('all'):
+            figurines_list = friends_selected.figurine_set.all()          
+        else:
+            return redirect('/users/friends_list/')
+
         return render(
             request,
             'users/friends_figurine_search.html',

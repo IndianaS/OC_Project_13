@@ -17,7 +17,7 @@
             <br>
             <form action="{% url 'users:friends_figurine_search' %}#search" method="get">
                 <div>
-                <input type="hidden" id="collection_friends" class="collection_user" name="q">
+                <input type="hidden" id="collection_friends" class="collection_user" value="all" name="all">
                 <input type="hidden" id="friend_id" class="collection_user" name="friend_id" value="{{ friend.id }}">
                 <button class="btn btn-primary text-uppercase js-scroll-trigger textcolorcustom">Voir la collection complète</button>
                 </div>
