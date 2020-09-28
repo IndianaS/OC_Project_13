@@ -11,3 +11,6 @@ def legal_notice(request):
 
 def contact_us(request):
     return render(request, 'collection_pop/contact_us.html')
+
+def who_are_we(request):
+    return render(request, 'collection_pop/who_are_we.html')
