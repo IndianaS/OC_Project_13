@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from users.models import User
+from friendship.models import Friend, FriendshipRequest
 
 
 class UsersTestViews(TestCase):
@@ -19,16 +20,25 @@ class UsersTestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed("users/profile.html")
 
+    def test_user_create_account_view(self):
+        response = self.client.get("/users/create_account/")
+        self.assertEqual(response.status_code, 200)
+
     def test_user_create_account_successfully(self):
         response = self.client.post(
             "/users/create_account/",
             {
-                "username": "TestUser",
+                "username": "NewTestUser",
+                "email": "newtestuser@mail.com",
                 "password1": "PaswordOfTheTest&120",
                 "password2": "PaswordOfTheTest&120",
             },
         )
-        self.assertEqual(response.status_code, 200)
+
+        new_user = User.objects.filter(username="NewTestUser").first()
+
+        self.assertEqual(new_user.username, "NewTestUser")
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('users/profile.html')
 
     def test_user_create_account_invalid(self):
@@ -43,11 +53,11 @@ class UsersTestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('users/create_account.html')
 
-    def test_user_del_user(self):
+    def test_user_del_existing_user(self):
         self.client.login(username="UserTest", password="PaswordOfTheTest&120")
         response = self.client.get(
             reverse('users:del_user')
-            )
+        )
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('/')
 
@@ -69,15 +79,67 @@ class UsersTestViews(TestCase):
         self.assertTemplateUsed('users/friends_list.html')
 
     def test_user_accept_request(self):
-        self.client.login(username="UserForAddFriend", password="PaswordTest&120")
+        self.client.login(username="UserForAddFriend",
+                          password="PaswordTest&120")
+        current_user = User.objects.get(username="UserForAddFriend")
+        other_user = User.objects.get(username='UserTest')
+        add_friend = Friend.objects.add_friend(other_user, current_user)
+
         response = self.client.post(
-            "/users/friends_list/",
+            "/users/accept_request/",
             {
-                "username": "UserTest",
+                "other_user_id": other_user.id,
+                "user_choice": "Accepted",
             },
         )
-        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('users/friends_list.html')
+
+    def test_user_reject_request(self):
+        self.client.login(username="UserForAddFriend",
+                          password="PaswordTest&120")
+
+        current_user = User.objects.get(username="UserForAddFriend")
+        other_user = User.objects.get(username='UserTest')
+        add_friend = Friend.objects.add_friend(other_user, current_user)
+
+        response = self.client.post(
+            "/users/accept_request/",
+            {
+                "other_user_id": other_user.id,
+                "user_choice": "Reject",
+            },
+        )
+
+        try:
+            friend_request = FriendshipRequest.objects.get(
+                from_user=other_user.id, to_user=current_user.id
+            )
+        except FriendshipRequest.DoesNotExist:
+            friend_request = None
+
+        self.assertEqual(friend_request, None)
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('users/friends_list.html')
 
     def test_user_remove_friend(self):
-       pass
+        pass
+
+    """
+    def test_user_friends_figurine(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.get("/users/friends_figurine/1")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed('users/friends_figurine.html')
+    
+    def test_user_friends_figurine_search(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.get(
+            "/users/friends_figurine_search/?q=Logan&friend_id=1"
+            )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('users/friends_figurine_search.html')
+    """

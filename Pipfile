@@ -8,6 +8,7 @@ ipython = "*"
 autopep8 = "*"
 black = "*"
 isort = {extras = ["pipfile", "requirements"],version = "*"}
+pytest-django = "*"
 
 [packages]
 django = "*"

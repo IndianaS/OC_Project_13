@@ -35,14 +35,11 @@ def create_account(request):
 @login_required(login_url='/users/login/')
 def del_user(request):
     """Django view del user"""
-    try:
-        if not request.user.is_superuser:
-            username = request.user
-            user = User.objects.get(username=username)
-            user.delete()
 
-    except User.DoesNotExist:
-        return redirect('/users/profile/')
+    if not request.user.is_superuser:
+        username = request.user
+        user = User.objects.get(username=username)
+        user.delete()
 
     return redirect('/')
 

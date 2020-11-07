@@ -15,12 +15,13 @@ class FigurineTestViews(TestCase):
         self.client.login(username="UserTest", password="PaswordOfTheTest&120")
         response = self.client.get('/figurines/collection/?q=logan')
         self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed('figurines/collection.html')
 
     def test_figurine_search(self):
         self.client.login(username="UserTest", password="PaswordOfTheTest&120")
-        response = self.client.get('/figurines/collection/?q=logan')
+        response = self.client.get('/figurines/search/?all=all')
         self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed('figurines/collection.html')
+        self.assertTemplateUsed('figurines/search.html')
 
     def test_figurine_did_you_see(self):
         self.client.login(username="UserTest", password="PaswordOfTheTest&120")
