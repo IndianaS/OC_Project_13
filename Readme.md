@@ -4,7 +4,7 @@
 - Inventory application of a collection of POP figurines.
 
 # - 1: Project online:
-- Go to the following address: "http://www.collectionpop.fr/"
+- Go to the following address: "https://www.collectionpop.fr/"
 
 # - 2: Initialization of the project locally:
 - 1: To initialize the virtual environment: `pipenv install`.

@@ -26,6 +26,3 @@ class UsersTestViews(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('users/profile.html')
-
-    def test_user_del_user(self):
-        pass

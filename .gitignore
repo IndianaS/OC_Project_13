@@ -2,3 +2,4 @@
 .flake8
 chromedriver.exe
 .coveragerc
+htmlcov
