@@ -1,6 +1,8 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from users.models import User
+from friendship.models import Friend, FriendshipRequest
 
 
 class UsersTestViews(TestCase):
