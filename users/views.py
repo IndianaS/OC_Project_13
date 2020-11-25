@@ -138,6 +138,7 @@ def remove_friend(request):
     """Django view remove friend the friend list"""
     user = request.user
     other_user_id = request.POST.get('other_user_id')
+
     other_user = get_object_or_404(User, id=other_user_id)
     user_del = Friend.objects.remove_friend(request.user, other_user)
 
