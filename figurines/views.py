@@ -25,11 +25,7 @@ def add_figurine(request):
 @login_required(login_url='/users/login/')
 def collection_user(request):
     """Django View from User Collection"""
-    user = request.user
-    figurines = user.figurine_set.all()
-    return render(
-        request, 'figurines/collection.html', {'figurines': figurines}
-    )
+    return render(request, 'figurines/collection.html')
 
 
 @login_required(login_url='/users/login/')
