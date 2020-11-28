@@ -172,5 +172,5 @@ class FigurineTestViews(TestCase):
     #             "text": "Bonjour, j'ai trouvé Batman",
     #         },
     #     )
-    #     self.assertEqual(response.status_code, 302)
+    #     self.assertEqual(response.status_code, 200)
     #     self.assertTemplateUsed('figurines/report_post.html')
