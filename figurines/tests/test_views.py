@@ -1,11 +1,12 @@
 from django.test import TestCase
-from figurines.models import Figurine, Category, DidYouSee
+from django.urls import reverse
+from figurines.models import Category, DidYouSee, Figurine
 from users.models import User
 
 
 class FigurineTestViews(TestCase):
     def setUp(self):
-        user_test = User.objects.create_user(
+        self.user_test = User.objects.create_user(
             username="UserTest", password="PaswordOfTheTest&120"
         )
         category_figurine = Category.objects.create(
@@ -17,7 +18,7 @@ class FigurineTestViews(TestCase):
             category=category_figurine,
             name="batman"
         )
-        figurine.user.add(user_test)
+        figurine.user.add(self.user_test)
 
         return super().setUp()
 
@@ -127,19 +128,18 @@ class FigurineTestViews(TestCase):
             f"/figurines/create_question/{post.id}",
             {
                 "title": "J'ai batman2",
-                "text": "jai batman",
+                "text": "j'ai batman",
                 "date": "20/07/2020",
             }
         )
 
         response_detail = self.client.get(f'/figurines/post_detail/{post.id}/')
-
-        self.assertContains(response_detail, "jai batman")
+        self.assertContains(response_detail, "j'ai batman")
         self.assertTemplateUsed('figurines/post_detail.html')
 
 
     def test_post_detail(self):
-        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        self.client.force_login(self.user_test)
         user = User.objects.get(username="UserTest")
         post = DidYouSee(
                 author=user,
@@ -157,12 +157,14 @@ class FigurineTestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('figurines/post_detail.html')
 
-    # def test_delete_figurine(self):
-    #     self.client.login(username="UserTest", password="PaswordOfTheTest&120")
-    #     response = self.client.get('/figurines/collection/?q=logan')
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertTemplateUsed('figurines/collection.html')
-
+    """
+    def test_delete_figurine(self):
+        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        response = self.client.post('/figurines/collection/?q=logan')
+        user = User.objects.get(username="UserTest")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed('figurines/collection.html')
+    """
     # def test_report_post(self):
     #     self.client.login(username="UserTest", password="PaswordOfTheTest&120")
     #     response = self.client.post(
