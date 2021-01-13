@@ -113,13 +113,12 @@ class FigurineTestViews(TestCase):
         self.assertTemplateUsed('figurines/did_you_see.html')
 
     def test_can_respond_to_question(self):
-        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
+        self.client.force_login(self.user_test)
         response = self.client.post(
             "/figurines/create_question",
             {
                 "title": "Je recherche batman2",
                 "text": "Bonjour, je recherche Batman2",
-                "date": "03/07/2020",
             },
         )
         post = DidYouSee.objects.get(title='Je recherche batman2')
@@ -129,13 +128,15 @@ class FigurineTestViews(TestCase):
             {
                 "title": "J'ai batman2",
                 "text": "j'ai batman",
-                "date": "20/07/2020",
             }
         )
 
+        response = DidYouSee.objects.get(title="J'ai batman2")
+
         response_detail = self.client.get(f'/figurines/post_detail/{post.id}/')
-        self.assertContains(response_detail, "j'ai batman")
-        self.assertTemplateUsed('figurines/post_detail.html')
+        self.assertIn(response, response_detail.context['responses'])
+        self.assertContains(response_detail, "j&#x27;ai batman")
+        self.assertTemplateUsed(response_detail, 'figurines/post_detail.html')
 
 
     def test_post_detail(self):
@@ -151,7 +152,7 @@ class FigurineTestViews(TestCase):
         post.save()
     
         response = self.client.get(
-            f"/figurines/post_detail/{post.id}"
+            f"/figurines/post_detail/{post.id}/"
         )
         self.assertContains(response, "Je recherche batman")
         self.assertEqual(response.status_code, 200)
