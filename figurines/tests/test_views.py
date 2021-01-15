@@ -157,23 +157,3 @@ class FigurineTestViews(TestCase):
         self.assertContains(response, "Je recherche batman")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('figurines/post_detail.html')
-
-    """
-    def test_delete_figurine(self):
-        self.client.login(username="UserTest", password="PaswordOfTheTest&120")
-        response = self.client.post('/figurines/collection/?q=logan')
-        user = User.objects.get(username="UserTest")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('figurines/collection.html')
-    """
-    # def test_report_post(self):
-    #     self.client.login(username="UserTest", password="PaswordOfTheTest&120")
-    #     response = self.client.post(
-    #         "/figurines/post_detail/51/",
-    #         {
-    #             "title": "Je recherche batman",
-    #             "text": "Bonjour, j'ai trouvé Batman",
-    #         },
-    #     )
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed('figurines/report_post.html')
