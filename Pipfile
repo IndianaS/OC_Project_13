@@ -22,7 +22,7 @@ flake8 = "*"
 django-friendship = "*"
 gunicorn = "*"
 sentry-sdk = "*"
-tchappui-webdrivers = "0.2.0"
+tchappui-webdrivers = "==0.2.0"
 
 [pipenv]
 allow_prereleases = true
