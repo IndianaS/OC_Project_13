@@ -35,14 +35,11 @@ def create_account(request):
 @login_required(login_url='/users/login/')
 def del_user(request):
     """Django view del user"""
-    try:
-        if not request.user.is_superuser:
-            username = request.user
-            user = User.objects.get(username=username)
-            user.delete()
 
-    except User.DoesNotExist:
-        return redirect('/users/profile/')
+    if not request.user.is_superuser:
+        username = request.user
+        user = User.objects.get(username=username)
+        user.delete()
 
     return redirect('/')
 
@@ -107,7 +104,7 @@ def add_friend(request):
         request.session[
             'user_already_added'
             ] = f"La demande à déjà été envoyée !"
-
+    
     except AlreadyFriendsError:
         request.session[
             'user_already_added'
@@ -141,6 +138,7 @@ def remove_friend(request):
     """Django view remove friend the friend list"""
     user = request.user
     other_user_id = request.POST.get('other_user_id')
+
     other_user = get_object_or_404(User, id=other_user_id)
     user_del = Friend.objects.remove_friend(request.user, other_user)
 

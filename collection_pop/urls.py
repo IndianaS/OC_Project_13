@@ -28,5 +28,5 @@ urlpatterns = [
     path("figurines/", include("figurines.urls", namespace="figurines")),
     path("legal_notice/", views.legal_notice, name="legal_notice"),
     path("contact_us/", views.contact_us, name="contact_us"),
-    path("who_are_we", views.who_are_we, name="who_are_we"),
+    path("who_are_we/", views.who_are_we, name="who_are_we"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
