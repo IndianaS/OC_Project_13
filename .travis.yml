@@ -1,0 +1,27 @@
+dist: bionic
+language: python
+
+python:
+  - '3.7'
+
+addons:
+  # ajouter uniquement les navigateurs utilisés
+  chrome: stable
+
+branches:
+  only:
+    - collection_pop_production
+    
+install:
+  - pip install pipenv
+  - pipenv install --dev
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE="collection_pop.settings.travis"
+
+services:
+  - postgresql
+
+script:
+  - python manage.py test -v2
