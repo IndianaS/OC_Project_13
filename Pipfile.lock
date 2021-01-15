@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bca323e3e30f658fff2d77c3d98ea90ffcdfadf05646c1deb3fe0ff88b4d995b"
+            "sha256": "aaa69d81a83185dbaf44f573d6d42dbfbb25bb9d502b658c727db27b8a353c95"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -403,11 +403,11 @@
         },
         "tchappui-webdrivers": {
             "hashes": [
-                "sha256:41c747d1d9f61cdf04b381d39cfec45e2711a4fec79497fa3e82cb4b02b92a18",
-                "sha256:ccc8d5d9619b8ec6fd84e03ba28c6d151166eadd2ece8a23c9d8fb554de88bda"
+                "sha256:29f4e57a1a19a49949c77e9ebf13d6aea9ea3620fb3cc2517fa48fdcb726d180",
+                "sha256:a208d78093adc8528407a1473f2e44da372f94896a7c1c788379531c8b73580e"
             ],
             "index": "pypi",
-            "version": "==0.3.7"
+            "version": "==0.2.0"
         },
         "trio": {
             "hashes": [
